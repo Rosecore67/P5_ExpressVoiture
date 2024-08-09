@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using P5_ExpressVoiture.Data;
 using P5_ExpressVoiture.Models.Entities;
+using P5_ExpressVoiture.Models.Interfaces.IRepositories;
+using P5_ExpressVoiture.Models.Interfaces.IServices;
+using P5_ExpressVoiture.Models.Repositories;
+using P5_ExpressVoiture.Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,26 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+// Injection des dépendances.
+builder.Services.AddScoped<IVoitureRepository, VoitureRepository>();
+builder.Services.AddScoped<IVoitureService, VoitureService>();
+
+builder.Services.AddScoped<IMarqueRepository, MarqueRepository>();
+builder.Services.AddScoped<IMarqueService, MarqueService>();
+
+builder.Services.AddScoped<IModeleRepository, ModeleRepository>();
+builder.Services.AddScoped<IModeleService, ModeleService>();
+
+builder.Services.AddScoped<IReparationRepository, ReparationRepository>();
+builder.Services.AddScoped<IReparationService, ReparationService>();
+
+builder.Services.AddScoped<ITypeReparationRepository, TypeReparationRepository>();
+builder.Services.AddScoped<ITypeReparationService, TypeReparationService>();
+
+builder.Services.AddScoped<IFinanceRepository, FinanceRepository>();
+builder.Services.AddScoped<IFinanceService, FinanceService>();
+
 
 builder.Services.AddIdentity<Utilisateur, UserRole>(options =>
 {

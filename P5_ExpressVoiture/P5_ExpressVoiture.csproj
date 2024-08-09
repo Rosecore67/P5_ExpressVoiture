@@ -16,11 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Interfaces\IRepositories\" />
-    <Folder Include="Models\Interfaces\IServices\" />
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Models\Services\" />
-    <Folder Include="Models\Repositories\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
