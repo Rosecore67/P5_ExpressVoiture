@@ -21,23 +21,36 @@ namespace P5_ExpressVoiture.Data
             modelBuilder.Entity<Voiture>()
                 .HasOne(v => v.Finance)
                 .WithOne(f => f.Voiture)
-                .HasForeignKey<Finance>(f => f.VoitureID);
+                .HasForeignKey<Finance>(f => f.VoitureID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Configuration de la relation entre Voiture et Réparation
             modelBuilder.Entity<Reparation>()
                 .HasOne(r => r.Voiture)
                 .WithMany(v => v.Reparations)
-                .HasForeignKey(r => r.VoitureID);
+                .HasForeignKey(r => r.VoitureID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Configuration de la relation entre Réparation et TypeRéparation
             modelBuilder.Entity<Reparation>()
                 .HasOne(r => r.TypeReparation)
                 .WithMany()
-                .HasForeignKey(r => r.TypeReparationID);
+                .HasForeignKey(r => r.TypeReparationID)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Utilisateur>()
-                .HasIndex(u => u.NomUtilisateur)
-                .IsUnique();
+            // Relation entre Voiture et Marque
+            modelBuilder.Entity<Voiture>()
+                .HasOne(v => v.Marque)
+                .WithMany()
+                .HasForeignKey(v => v.MarqueID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Relation entre Voiture et Modele
+            modelBuilder.Entity<Voiture>()
+                .HasOne(v => v.Modele)
+                .WithMany()
+                .HasForeignKey(v => v.ModeleID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configuration de la propriété NomRole pour être requis
             modelBuilder.Entity<UserRole>()
