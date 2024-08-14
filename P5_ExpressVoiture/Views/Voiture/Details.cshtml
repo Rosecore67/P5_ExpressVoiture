@@ -1,0 +1,27 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.VoitureDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<P5_ExpressVoiture.Models.Entities.Utilisateur> SignInManager
+@inject UserManager<P5_ExpressVoiture.Models.Entities.Utilisateur> UserManager
+
+@{
+    ViewData["Title"] = $"{Model.Marque} {Model.Modele}";
+}
+
+<h1>@Model.Marque @Model.Modele (@Model.Année.Year)</h1>
+
+<img src="~/@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
+
+<p>Finition : @Model.Finition</p>
+<p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
+<p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
+<p>Prix de vente : @Model.PrixVente?.ToString("C") ?? "Prix non disponible"</p>
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <hr />
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
+}
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+</div>

@@ -1,0 +1,67 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.VoitureViewModel
+
+@{
+    ViewData["Title"] = "Ajouter une voiture";
+}
+
+<h1>Ajouter une voiture</h1>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="CodeVIN" class="control-label"></label>
+        <input asp-for="CodeVIN" class="form-control" />
+        <span asp-validation-for="CodeVIN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Année" class="control-label"></label>
+        <input asp-for="Année" class="form-control" type="date" />
+        <span asp-validation-for="Année" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MarqueID" class="control-label">Marque</label>
+        <select asp-for="MarqueID" class="form-control" asp-items="@(new SelectList(Model.Marques, "Id", "NomMarque"))">
+            <option value="">Sélectionnez une marque</option> <!-- Option de base -->
+        </select>
+        <span asp-validation-for="MarqueID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModeleID" class="control-label">Modèle</label>
+        <select asp-for="ModeleID" class="form-control" asp-items="@(new SelectList(Model.Modeles, "Id", "NomModele"))">
+            <option value="">Sélectionnez un modèle</option> <!-- Option de base -->
+        </select>
+        <span asp-validation-for="ModeleID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Finition" class="control-label"></label>
+        <input asp-for="Finition" class="form-control" />
+        <span asp-validation-for="Finition" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateAchat" class="control-label"></label>
+        <input asp-for="DateAchat" class="form-control" type="date" />
+        <span asp-validation-for="DateAchat" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateDisponibiliteVente" class="control-label"></label>
+        <input asp-for="DateDisponibiliteVente" class="form-control" />
+        <span asp-validation-for="DateDisponibiliteVente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageFile" class="control-label">Image du véhicule</label>
+        <input asp-for="ImageFile" class="form-control" type="file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ajouter" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Retour à la liste</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
