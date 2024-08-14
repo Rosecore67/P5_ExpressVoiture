@@ -6,8 +6,8 @@ namespace P5_ExpressVoiture.Models.ViewModels
     {
         public int Id { get; set; }
         public string? CodeVIN { get; set; }
-        public string? Marque { get; set; }
-        public string? Modele { get; set; }
+        public string Marque { get; set; }
+        public string Modele { get; set; }
         public DateTime Année { get; set; }
         public string? Finition { get; set; }
         public DateTime DateAchat { get; set; }

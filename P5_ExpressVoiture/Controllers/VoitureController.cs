@@ -131,8 +131,8 @@ namespace P5_ExpressVoiture.Controllers
             {
                 Id = voiture.Id,
                 CodeVIN = voiture.CodeVIN,
-                Marque = voiture.Marque?.NomMarque,
-                Modele = voiture.Modele?.NomModele,
+                Marque = voiture.MarqueID > 0 ? (await _marqueService.GetMarqueByIdAsync(voiture.MarqueID))?.NomMarque : "Marque inconnue",
+                Modele = voiture.ModeleID > 0 ? (await _modeleService.GetModeleByIdAsync(voiture.ModeleID))?.NomModele : "Modèle inconnu",
                 Année = voiture.Année,
                 Finition = voiture.Finition,
                 DateAchat = voiture.DateAchat,

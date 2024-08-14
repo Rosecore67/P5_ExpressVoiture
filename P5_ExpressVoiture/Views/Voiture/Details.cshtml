@@ -7,14 +7,14 @@
     ViewData["Title"] = $"{Model.Marque} {Model.Modele}";
 }
 
-<h1>@Model.Marque @Model.Modele (@Model.Année.Year)</h1>
+<h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
 
 <img src="~/@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
 
 <p>Finition : @Model.Finition</p>
 <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
 <p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
-<p>Prix de vente : @Model.PrixVente?.ToString("C") ?? "Prix non disponible"</p>
+<p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
