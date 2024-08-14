@@ -43,5 +43,11 @@ namespace P5_ExpressVoiture.Models.Services
                 await _reparationRepository.SaveChangesAsync();
             }
         }
+
+        // Méthode pour obtenir le coût total des réparations
+        public async Task<decimal> GetTotalCoutReparationsByVoitureId(int voitureId)
+        {
+            return await _reparationRepository.GetTotalCoutReparationsByVoitureId(voitureId);
+        }
     }
 }
