@@ -27,8 +27,9 @@
                     <p class="card-text">
                         Année : @voiture.Année.Year<br />
                         Finition : @voiture.Finition<br />
+                        Date de disponibilité à la vente : @voiture.DateDisponibiliteVente.ToShortDateString()<br />
                         Disponibilité : @(voiture.EstDisponible ? "Disponible" : "Non disponible")<br />
-                        Prix : @voiture.PrixVente?.ToString("C") ?? "Prix non disponible"
+                        Prix : @(voiture.PrixVente?.ToString("C") ?? "Prix non disponible")<br />                        
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a asp-action="Details" asp-route-id="@voiture.Id" class="btn btn-sm btn-outline-secondary">Voir les détails</a>

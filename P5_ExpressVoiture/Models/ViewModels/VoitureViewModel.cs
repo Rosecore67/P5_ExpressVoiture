@@ -35,8 +35,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
 
         public string? Image { get; set; }
 
-        [Required(ErrorMessage = "Veuillez choisir une image.")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
         [BindNever]
         public IEnumerable<Marque> Marques { get; set; }

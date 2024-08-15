@@ -44,6 +44,7 @@ namespace P5_ExpressVoiture.Controllers
                 Année = v.Année,
                 Finition = v.Finition,
                 DateAchat = v.DateAchat,
+                DateDisponibiliteVente = v.DateDisponibiliteVente,
                 EstDisponible = v.EstDisponible,
                 Image = v.Image,
                 PrixVente = v.Finance?.PrixVente ?? 0m
@@ -223,9 +224,25 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var voiture = await _voitureService.GetVoitureByIdAsync(id);
-            if (voiture == null) return NotFound();
+            if (voiture == null)
+            {
+                return NotFound();
+            }
 
-            return View(voiture);
+            var voitureViewModel = new VoitureDetailsViewModel
+            {
+                Id = voiture.Id,
+                Marque = voiture.MarqueID > 0 ? (await _marqueService.GetMarqueByIdAsync(voiture.MarqueID))?.NomMarque : "Marque inconnue",
+                Modele = voiture.ModeleID > 0 ? (await _modeleService.GetModeleByIdAsync(voiture.ModeleID))?.NomModele : "Modèle inconnu",
+                Année = voiture.Année,
+                Finition = voiture.Finition,
+                DateAchat = voiture.DateAchat,
+                DateDisponibiliteVente = voiture.DateDisponibiliteVente,
+                Image = voiture.Image,
+                EstDisponible = voiture.EstDisponible
+            };
+
+            return View(voitureViewModel);
         }
 
         // POST: /Voiture/Delete/1
@@ -234,8 +251,25 @@ namespace P5_ExpressVoiture.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var voiture = await _voitureService.GetVoitureByIdAsync(id);
+
+            if (voiture == null)
+            {
+                return NotFound();
+            }
+
+            // Suppression de l'image associée si elle existe
+            if (!string.IsNullOrEmpty(voiture.Image))
+            {
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", voiture.Image);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+
             await _voitureService.DeleteVoitureAsync(id);
             return RedirectToAction("Index");
-        }       
+        }
     }
 }

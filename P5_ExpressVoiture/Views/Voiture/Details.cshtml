@@ -14,6 +14,7 @@
 <p>Finition : @Model.Finition</p>
 <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
 <p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
+<p>Date de disponibilité à la vente : @Model.DateDisponibiliteVente.ToShortDateString()</p>
 <p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))

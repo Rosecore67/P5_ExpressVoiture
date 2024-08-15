@@ -11,6 +11,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public DateTime Année { get; set; }
         public string Finition { get; set; }
         public DateTime DateAchat { get; set; }
+        public DateTime DateDisponibiliteVente { get; set; }
         public bool EstDisponible { get; set; }
         public string Image { get; set; }
         public decimal? PrixVente { get; set; }
