@@ -49,5 +49,10 @@ namespace P5_ExpressVoiture.Models.Services
         {
             return await _reparationRepository.GetTotalCoutReparationsByVoitureId(voitureId);
         }
+        // Méthode pour obtenir les réparations d'un véhicule
+        public async Task<IEnumerable<Reparation>> GetReparationsByVoitureIdAsync(int voitureId)
+        {
+            return await _reparationRepository.GetReparationsByVoitureIdAsync(voitureId);
+        }
     }
 }

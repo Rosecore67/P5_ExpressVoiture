@@ -20,6 +20,7 @@
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <hr />
+    <a asp-controller="Reparation"  class="btn btn-info">Gestion Réparations</a>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
     <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
 }

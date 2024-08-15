@@ -18,5 +18,13 @@ namespace P5_ExpressVoiture.Models.Repositories
                                  .Where(r => r.VoitureID == voitureId)
                                  .SumAsync(r => r.CoutReparation);
         }
+        // Méthode pour obtenir les réparations d'un véhicule
+        public async Task<IEnumerable<Reparation>> GetReparationsByVoitureIdAsync(int voitureId)
+        {
+            return await _context.Reparations
+                .Where(r => r.VoitureID == voitureId)
+                .Include(r => r.TypeReparation)
+                .ToListAsync();
+        }       
     }
 }
