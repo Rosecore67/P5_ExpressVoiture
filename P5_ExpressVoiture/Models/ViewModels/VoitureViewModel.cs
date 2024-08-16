@@ -37,9 +37,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
 
         public IFormFile? ImageFile { get; set; }
 
-        [BindNever]
-        public IEnumerable<Marque> Marques { get; set; }
-        [BindNever]
-        public IEnumerable<Modele> Modeles { get; set; }
+        public IEnumerable<Marque>? Marques { get; set; }
+        public IEnumerable<Modele>? Modeles { get; set; }
     }
 }

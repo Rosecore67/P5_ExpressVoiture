@@ -35,22 +35,35 @@ namespace P5_ExpressVoiture.Controllers
         {
             var voitures = await _voitureService.GetAllVoituresAsync();
 
-            var model = voitures.Select(v => new VoitureIndexViewModel
+            var model = new List<VoitureIndexViewModel>();
+
+            foreach (var v in voitures)
             {
-                Id = v.Id,
-                CodeVIN = v.CodeVIN,
-                Marque = v.MarqueID > 0 ? _marqueService.GetMarqueByIdAsync(v.MarqueID).Result?.NomMarque : "Marque inconnue",
-                Modele = v.ModeleID > 0 ? _modeleService.GetModeleByIdAsync(v.ModeleID).Result?.NomModele : "Modèle inconnu",
-                Année = v.Année,
-                Finition = v.Finition,
-                DateAchat = v.DateAchat,
-                DateDisponibiliteVente = v.DateDisponibiliteVente,
-                EstDisponible = v.EstDisponible,
-                Image = v.Image,
-                PrixVente = v.Finance?.PrixVente ?? 0m
-            }).ToList();
+                var marque = await _marqueService.GetMarqueByIdAsync(v.MarqueID);
+                var modele = await _modeleService.GetModeleByIdAsync(v.ModeleID);
+                var coutClient = await _financeService.GetFinanceByVoitureIdAsync(v.Id);
+                var prixVente = coutClient?.PrixVente ?? 0;
+
+                var voiture = new VoitureIndexViewModel
+                {
+                    Id = v.Id,
+                    CodeVIN = v.CodeVIN ?? "",
+                    Marque = marque.NomMarque ?? "Marque inconnue",
+                    Modele = modele.NomModele ?? "Modele inconnu",
+                    Année = v.Année,
+                    Finition = v.Finition ?? "",
+                    DateAchat = v.DateAchat,
+                    DateDisponibiliteVente = v.DateDisponibiliteVente,
+                    EstDisponible = v.EstDisponible,
+                    Image = v.Image ?? "default.png",
+                    PrixVente = prixVente
+                };
+
+                model.Add(voiture);
+            }
 
             return View(model);
+
         }
 
         // GET: /Voiture/Create
@@ -73,29 +86,9 @@ namespace P5_ExpressVoiture.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(VoitureViewModel model)
         {
-            ModelState.Remove("Marques");
-            ModelState.Remove("Modeles");
             if (ModelState.IsValid)
             {
-                string imagePath = null;
-
-                if (model.ImageFile != null && model.ImageFile.Length > 0)
-                {
-                    var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                    imagePath = Path.Combine(uploads, model.ImageFile.FileName);
-
-                    if (!Directory.Exists(uploads))
-                    {
-                        Directory.CreateDirectory(uploads);
-                    }
-
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(stream);
-                    }
-
-                    imagePath = "images/" + model.ImageFile.FileName;
-                }
+                string imagePath = await _voitureService.UploadImageAsync(model.ImageFile);
 
                 var voiture = new Voiture
                 {
@@ -127,13 +120,17 @@ namespace P5_ExpressVoiture.Controllers
         {
             var voiture = await _voitureService.GetVoitureByIdAsync(id);
             if (voiture == null) return NotFound();
+            var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+            var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
+            var coutClient = await _financeService.GetFinanceByVoitureIdAsync(voiture.Id);
+            var prixVente = coutClient?.PrixVente ?? 0;
 
             var model = new VoitureDetailsViewModel
             {
                 Id = voiture.Id,
                 CodeVIN = voiture.CodeVIN,
-                Marque = voiture.MarqueID > 0 ? (await _marqueService.GetMarqueByIdAsync(voiture.MarqueID))?.NomMarque : "Marque inconnue",
-                Modele = voiture.ModeleID > 0 ? (await _modeleService.GetModeleByIdAsync(voiture.ModeleID))?.NomModele : "Modèle inconnu",
+                Marque = marque.NomMarque ?? "Marque inconnue",
+                Modele = modele.NomModele ?? "Modèle inconnu",
                 Année = voiture.Année,
                 Finition = voiture.Finition,
                 DateAchat = voiture.DateAchat,
@@ -141,7 +138,7 @@ namespace P5_ExpressVoiture.Controllers
                 DateVente = voiture.DateVente,
                 EstDisponible = voiture.EstDisponible,
                 Image = voiture.Image,
-                PrixVente = voiture.Finance?.PrixVente
+                PrixVente = prixVente,
             };
 
             return View(model);
@@ -155,6 +152,8 @@ namespace P5_ExpressVoiture.Controllers
         {
             var voiture = await _voitureService.GetVoitureByIdAsync(id);
             if (voiture == null) return NotFound();
+            var marque = await _marqueService.GetAllMarquesAsync();
+            var modele = await _modeleService.GetAllModelesAsync();
 
             var model = new VoitureViewModel
             {
@@ -167,8 +166,8 @@ namespace P5_ExpressVoiture.Controllers
                 DateAchat = voiture.DateAchat,
                 DateDisponibiliteVente = voiture.DateDisponibiliteVente,
                 EstDisponible = voiture.EstDisponible,
-                Marques = await _marqueService.GetAllMarquesAsync(),
-                Modeles = await _modeleService.GetAllModelesAsync(),
+                Marques = marque,
+                Modeles = modele,
                 Image = voiture.Image
             };
 
@@ -181,8 +180,6 @@ namespace P5_ExpressVoiture.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, VoitureViewModel model)
         {
-            ModelState.Remove("Marques");
-            ModelState.Remove("Modeles");
             if (ModelState.IsValid)
             {
                 var voiture = await _voitureService.GetVoitureByIdAsync(id);
@@ -199,12 +196,8 @@ namespace P5_ExpressVoiture.Controllers
 
                 if (model.ImageFile != null)
                 {
-                    string imagePath = Path.Combine("wwwroot/images", model.ImageFile.FileName);
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(stream);
-                    }
-                    voiture.Image = "images/" + model.ImageFile.FileName;
+                    _voitureService.DeleteImage(voiture.Image);
+                    voiture.Image = await _voitureService.UploadImageAsync(model.ImageFile);
                 }
 
                 await _voitureService.UpdateVoitureAsync(voiture);
@@ -228,12 +221,14 @@ namespace P5_ExpressVoiture.Controllers
             {
                 return NotFound();
             }
+            var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+            var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
 
             var voitureViewModel = new VoitureDetailsViewModel
             {
                 Id = voiture.Id,
-                Marque = voiture.MarqueID > 0 ? (await _marqueService.GetMarqueByIdAsync(voiture.MarqueID))?.NomMarque : "Marque inconnue",
-                Modele = voiture.ModeleID > 0 ? (await _modeleService.GetModeleByIdAsync(voiture.ModeleID))?.NomModele : "Modèle inconnu",
+                Marque = marque.NomMarque ?? "Marque inconnue",
+                Modele = modele.NomModele ?? "Modèle inconnu",
                 Année = voiture.Année,
                 Finition = voiture.Finition,
                 DateAchat = voiture.DateAchat,
@@ -258,16 +253,7 @@ namespace P5_ExpressVoiture.Controllers
                 return NotFound();
             }
 
-            // Suppression de l'image associée si elle existe
-            if (!string.IsNullOrEmpty(voiture.Image))
-            {
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", voiture.Image);
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
-            }
-
+            _voitureService.DeleteImage(voiture.Image);
             await _voitureService.DeleteVoitureAsync(id);
             return RedirectToAction("Index");
         }

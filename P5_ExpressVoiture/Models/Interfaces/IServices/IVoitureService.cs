@@ -10,5 +10,7 @@ namespace P5_ExpressVoiture.Models.Interfaces.IServices
         Task AddVoitureAsync(Voiture voiture);
         Task UpdateVoitureAsync(Voiture voiture);
         Task DeleteVoitureAsync(int id);
+        Task<string> UploadImageAsync(IFormFile imageFile);
+        void DeleteImage(string imagePath);
     }
 }

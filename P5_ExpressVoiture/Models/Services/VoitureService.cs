@@ -48,5 +48,40 @@ namespace P5_ExpressVoiture.Models.Services
                 await _voitureRepository.SaveChangesAsync();
             }
         }
+
+        public async Task<string> UploadImageAsync(IFormFile imageFile)
+        {
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var imagePath = Path.Combine(uploads, imageFile.FileName);
+
+                if (!Directory.Exists(uploads))
+                {
+                    Directory.CreateDirectory(uploads);
+                }
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                return "images/" + imageFile.FileName;
+            }
+
+            return null;
+        }
+
+        public void DeleteImage(string imagePath)
+        {
+            if (!string.IsNullOrEmpty(imagePath))
+            {
+                var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+            }
+        }
     }
 }
