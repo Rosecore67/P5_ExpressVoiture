@@ -34,15 +34,24 @@ builder.Services.AddScoped<ITypeReparationService, TypeReparationService>();
 builder.Services.AddScoped<IFinanceRepository, FinanceRepository>();
 builder.Services.AddScoped<IFinanceService, FinanceService>();
 
+builder.Services.AddScoped<IUtilisateurRepository, UtilisateurRepository>();
+builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
+
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+
 
 builder.Services.AddIdentity<Utilisateur, UserRole>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedEmail = false;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddUserManager<UserManager<Utilisateur>>()
+    .AddRoleManager<RoleManager<UserRole>>();
 
 builder.Services.AddControllersWithViews();
 
@@ -53,6 +62,10 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
+    // Sign in settings.
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+
     // Password settings.
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;

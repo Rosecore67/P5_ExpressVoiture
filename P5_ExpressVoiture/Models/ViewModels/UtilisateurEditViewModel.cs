@@ -2,7 +2,7 @@
 
 namespace P5_ExpressVoiture.Models.ViewModels
 {
-    public class UtilisateurViewModel
+    public class UtilisateurEditViewModel
     {
         public string? Id { get; set; }
 
@@ -13,14 +13,6 @@ namespace P5_ExpressVoiture.Models.ViewModels
         [EmailAddress(ErrorMessage = "Format de l'email invalide.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Le mot de passe est requis.")]
-        [DataType(DataType.Password)]
-        public string MotDePasse { get; set; }
-
-        [DataType(DataType.Password)]
-        [Compare("MotDePasse", ErrorMessage = "Les mots de passe ne correspondent pas.")]
-        public string ConfirmMotDePasse { get; set; }
-
         // Liste des rôles disponibles
         public List<UserRoleViewModel>? Roles { get; set; }
 
@@ -29,4 +21,3 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public string SelectedRoleId { get; set; }
     }
 }
-
