@@ -7,10 +7,12 @@ namespace P5_ExpressVoiture.Models.Services
     public class ReparationService : IReparationService
     {
         private readonly IReparationRepository _reparationRepository;
+        private readonly IFinanceService _financeService;
 
-        public ReparationService(IReparationRepository reparationRepository)
+        public ReparationService(IReparationRepository reparationRepository, IFinanceService financeService)
         {
             _reparationRepository = reparationRepository;
+            _financeService = financeService;
         }
 
         public async Task<IEnumerable<Reparation>> GetAllReparationsAsync()
@@ -26,12 +28,14 @@ namespace P5_ExpressVoiture.Models.Services
         public async Task AddReparationAsync(Reparation reparation)
         {
             await _reparationRepository.AddAsync(reparation);
+            await RecalculatePrixVenteAsync(reparation.VoitureID);
         }
 
         public async Task UpdateReparationAsync(Reparation reparation)
         {
             _reparationRepository.Update(reparation);
             await _reparationRepository.SaveChangesAsync();
+            await RecalculatePrixVenteAsync(reparation.VoitureID);
         }
 
         public async Task DeleteReparationAsync(int id)
@@ -41,6 +45,7 @@ namespace P5_ExpressVoiture.Models.Services
             {
                 _reparationRepository.Delete(reparation);
                 await _reparationRepository.SaveChangesAsync();
+                await RecalculatePrixVenteAsync(reparation.VoitureID);
             }
         }
 
@@ -53,6 +58,16 @@ namespace P5_ExpressVoiture.Models.Services
         public async Task<IEnumerable<Reparation>> GetReparationsByVoitureIdAsync(int voitureId)
         {
             return await _reparationRepository.GetReparationsByVoitureIdAsync(voitureId);
+        }
+        //Méthode pour recalculer le prix de vente à l'ajout d'une réparation
+        private async Task RecalculatePrixVenteAsync(int voitureId)
+        {
+            var finance = await _financeService.GetFinanceByVoitureIdAsync(voitureId);
+            if (finance != null)
+            {
+                // Le prix de vente est calculé et mis à jour dans la méthode UpdateFinanceAsync
+                await _financeService.UpdateFinanceAsync(finance);
+            }
         }
     }
 }

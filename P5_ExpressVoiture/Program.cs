@@ -42,6 +42,8 @@ builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
+builder.Services.AddScoped<ICalculerPrixVenteService, CalculerPrixVenteService>();
+
 
 builder.Services.AddIdentity<Utilisateur, UserRole>(options =>
 {

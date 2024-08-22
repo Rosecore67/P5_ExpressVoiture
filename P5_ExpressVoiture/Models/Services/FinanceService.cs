@@ -7,12 +7,12 @@ namespace P5_ExpressVoiture.Models.Services
     public class FinanceService : IFinanceService
     {
         private readonly IFinanceRepository _financeRepository;
-        private readonly IReparationService _reparationService;
+        private readonly ICalculerPrixVenteService _calculerPrixVenteService;
 
-        public FinanceService(IFinanceRepository financeRepository, IReparationService reparationService)
+        public FinanceService(IFinanceRepository financeRepository, ICalculerPrixVenteService calculerPrixVenteService)
         {
             _financeRepository = financeRepository;
-            _reparationService = reparationService;
+            _calculerPrixVenteService = calculerPrixVenteService;
         }
 
         public async Task<Finance> GetFinanceByVoitureIdAsync(int voitureId)
@@ -32,14 +32,14 @@ namespace P5_ExpressVoiture.Models.Services
 
         public async Task AddFinanceAsync(Finance finance)
         {
-            finance.PrixVente = await CalculatePrixVente(finance.VoitureID, finance.PrixAchat ?? 0);
+            finance.PrixVente = await _calculerPrixVenteService.CalculatePrixVenteAsync(finance.VoitureID, finance.PrixAchat ?? 0);
             await _financeRepository.AddAsync(finance);
             await _financeRepository.SaveChangesAsync();
         }
 
         public async Task UpdateFinanceAsync(Finance finance)
         {
-            finance.PrixVente = await CalculatePrixVente(finance.VoitureID, finance.PrixAchat ?? 0);
+            finance.PrixVente = await _calculerPrixVenteService.CalculatePrixVenteAsync(finance.VoitureID, finance.PrixAchat ?? 0);
             _financeRepository.Update(finance);
             await _financeRepository.SaveChangesAsync();
         }
@@ -52,14 +52,6 @@ namespace P5_ExpressVoiture.Models.Services
                 _financeRepository.Delete(finance);
                 await _financeRepository.SaveChangesAsync();
             }
-        }
-
-        // Calcul du prix de vente d'une voiture
-        private async Task<decimal> CalculatePrixVente(int voitureId, decimal prixAchat)
-        {
-            var totalCoutReparations = await _reparationService.GetTotalCoutReparationsByVoitureId(voitureId);
-            var totalPrixVente = prixAchat + totalCoutReparations + 500;
-            return totalPrixVente;
         }
     }
 }
