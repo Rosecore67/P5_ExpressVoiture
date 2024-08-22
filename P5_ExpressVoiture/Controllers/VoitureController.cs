@@ -68,7 +68,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // GET: /Voiture/Create
         // Afficher le formulaire de création de voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -82,7 +82,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // POST: /Voiture/Create
         // Créer une nouvelle voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(VoitureViewModel model)
         {
@@ -146,7 +146,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // GET: /Voiture/Edit/1
         // Afficher le formulaire d'édition d'une voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -176,7 +176,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // POST: /Voiture/Edit/1
         // Mettre à jour une voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, VoitureViewModel model)
         {
@@ -212,7 +212,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // GET: /Voiture/Delete/1
         // Afficher la page de suppression d'une voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -242,7 +242,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // POST: /Voiture/Delete/1
         // Confirmer la suppression d'une voiture
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
