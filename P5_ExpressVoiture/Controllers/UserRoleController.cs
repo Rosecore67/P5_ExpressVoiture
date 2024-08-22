@@ -18,7 +18,15 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Index()
         {
             var roles = await _roleService.GetAllRolesAsync();
-            return View(roles);
+
+            // Conversion de UserRole en UserRoleViewModel
+            var model = roles.Select(role => new UserRoleViewModel
+            {
+                Id = role.Id,
+                NomRole = role.NomRole
+            }).ToList();
+
+            return View(model);
         }
 
         // GET: Role/Create
