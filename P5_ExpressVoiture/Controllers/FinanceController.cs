@@ -63,9 +63,9 @@ namespace P5_ExpressVoiture.Controllers
         }
 
         // GET: Finance/Edit/1
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int voitureId)
         {
-            var finance = await _financeService.GetFinanceByIdAsync(id);
+            var finance = await _financeService.GetFinanceByVoitureIdAsync(voitureId);
             if (finance == null)
             {
                 return NotFound();
@@ -73,6 +73,7 @@ namespace P5_ExpressVoiture.Controllers
 
             var model = new FinanceViewModel
             {
+                FinanceId = finance.Id, // Utiliser l'ID de la finance ici
                 VoitureID = finance.VoitureID,
                 PrixAchat = finance.PrixAchat ?? 0,
                 PrixVente = finance.PrixVente ?? 0
@@ -87,13 +88,14 @@ namespace P5_ExpressVoiture.Controllers
         {
             if (ModelState.IsValid)
             {
-                var finance = new Finance
+                var finance = await _financeService.GetFinanceByIdAsync(model.FinanceId);
+                if (finance == null)
                 {
-                    Id = model.VoitureID,
-                    VoitureID = model.VoitureID,
-                    PrixAchat = model.PrixAchat,
-                    PrixVente = model.PrixVente
-                };
+                    return NotFound();
+                }
+
+                finance.PrixAchat = model.PrixAchat;
+                finance.PrixVente = model.PrixVente;
 
                 await _financeService.UpdateFinanceAsync(finance);
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });

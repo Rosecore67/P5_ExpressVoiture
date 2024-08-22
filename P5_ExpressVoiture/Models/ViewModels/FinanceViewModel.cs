@@ -4,6 +4,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
 {
     public class FinanceViewModel
     {
+        public int FinanceId { get; set; }
         public int VoitureID { get; set; }
 
         [Required(ErrorMessage = "Le prix d'achat est requis.")]

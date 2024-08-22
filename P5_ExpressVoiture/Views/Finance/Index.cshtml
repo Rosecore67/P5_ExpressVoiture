@@ -13,5 +13,5 @@
     </tr>
 </table>
 
-<a asp-action="Edit" asp-route-id="@Model.VoitureID" class="btn btn-warning">Modifier</a>
+<a asp-controller="Finance" asp-action="Edit" asp-route-voitureId="@Model.VoitureID" class="btn btn-warning">Modifier</a>
 <a asp-controller="Voiture" asp-action="Index" class="btn btn-secondary">Retour à la liste des voitures</a>

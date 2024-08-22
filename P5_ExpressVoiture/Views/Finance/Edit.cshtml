@@ -5,7 +5,8 @@
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <input type="hidden" asp-for="VoitureID" />
+    <input type="hidden" asp-for="FinanceId" /> <!-- ID de la finance -->
+    <input type="hidden" asp-for="VoitureID" /> <!-- ID de la voiture -->
 
     <div class="form-group">
         <label asp-for="PrixAchat" class="control-label"></label>
