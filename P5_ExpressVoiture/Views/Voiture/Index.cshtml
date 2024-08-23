@@ -20,9 +20,9 @@
     @foreach (var voiture in Model)
     {
         <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="~/@voiture.Image" alt="Image de @voiture.Marque @voiture.Modele">
-                <div class="card-body">
+            <div class="card mb-4 box-shadow" style="height: 500px;">
+                <img class="card-img-top" src="@Url.Content(voiture.Image)" alt="Image de @voiture.Marque @voiture.Modele" style="height: 200px; object-fit: cover;">
+                <div class="card-body" style="height: 260px; overflow: hidden;">
                     <h5 class="card-title">@voiture.Marque @voiture.Modele</h5>
                     <p class="card-text">
                         Année : @voiture.Année.Year<br />

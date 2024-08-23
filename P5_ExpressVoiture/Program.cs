@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using P5_ExpressVoiture.Data;
+using P5_ExpressVoiture.Models;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IRepositories;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.Repositories;
 using P5_ExpressVoiture.Models.Services;
+using P5_ExpressVoiture.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Injection des dépendances.
 builder.Services.AddScoped<IVoitureRepository, VoitureRepository>();
@@ -42,8 +44,7 @@ builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
-builder.Services.AddScoped<ICalculerPrixVenteService, CalculerPrixVenteService>();
-
+builder.Services.AddScoped<CalculePrix>();
 
 builder.Services.AddIdentity<Utilisateur, UserRole>(options =>
 {

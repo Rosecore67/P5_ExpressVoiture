@@ -43,6 +43,7 @@ namespace P5_ExpressVoiture.Controllers
                 var modele = await _modeleService.GetModeleByIdAsync(v.ModeleID);
                 var coutClient = await _financeService.GetFinanceByVoitureIdAsync(v.Id);
                 var prixVente = coutClient?.PrixVente ?? 0;
+                var image = string.IsNullOrEmpty(v.Image) ? "~/images/default.png" : v.Image;
 
                 var voiture = new VoitureIndexViewModel
                 {
@@ -55,7 +56,7 @@ namespace P5_ExpressVoiture.Controllers
                     DateAchat = v.DateAchat,
                     DateDisponibiliteVente = v.DateDisponibiliteVente,
                     EstDisponible = v.EstDisponible,
-                    Image = v.Image ?? "default.png",
+                    Image = image,
                     PrixVente = prixVente
                 };
 
@@ -124,6 +125,7 @@ namespace P5_ExpressVoiture.Controllers
             var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
             var coutClient = await _financeService.GetFinanceByVoitureIdAsync(voiture.Id);
             var prixVente = coutClient?.PrixVente ?? 0;
+            var image = string.IsNullOrEmpty(voiture.Image) ? Url.Content("~/images/default.png") : Url.Content("~/" + voiture.Image);
 
             var model = new VoitureDetailsViewModel
             {
@@ -137,7 +139,7 @@ namespace P5_ExpressVoiture.Controllers
                 DateDisponibiliteVente = voiture.DateDisponibiliteVente,
                 DateVente = voiture.DateVente,
                 EstDisponible = voiture.EstDisponible,
-                Image = voiture.Image,
+                Image = image,
                 PrixVente = prixVente,
             };
 

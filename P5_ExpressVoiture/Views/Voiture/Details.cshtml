@@ -9,7 +9,7 @@
 
 <h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
 
-<img src="~/@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
+<img src="@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
 
 <p>Finition : @Model.Finition</p>
 <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
@@ -20,6 +20,7 @@
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <hr />
+    <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Gestion Finances</a>
     <a asp-controller="Reparation"  class="btn btn-info">Gestion Réparations</a>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
     <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
