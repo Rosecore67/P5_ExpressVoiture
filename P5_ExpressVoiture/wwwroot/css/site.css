@@ -87,7 +87,7 @@ body {
 .voiture-image {
     max-width: 100%;
     max-height: 500px;
-    object-fit: contain; /* Important pour ajuster l'image sans la couper */
+    object-fit: contain;
     border-radius: 8px;
 }
 
@@ -123,4 +123,35 @@ body {
 
     .back-link:hover {
         text-decoration: underline;
+    }
+
+.custom-button {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .custom-button:hover {
+        background-color: #925f2a;
+        color: white;
+    }
+
+.btn-finances {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .btn-finances:hover {
+        background-color: #925f2a;
+    }
+
+.btn-reparations {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .btn-reparations:hover {
+        background-color: #925f2a;
     }

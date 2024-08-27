@@ -31,8 +31,8 @@
         {
             <hr />
             <div class="admin-actions">
-                <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Finances</a>
-                <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Réparations</a>
+                <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-finances">Finances</a>
+                <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-reparations">Réparations</a>
                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
                 <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
             </div>
