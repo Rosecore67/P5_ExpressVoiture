@@ -8,6 +8,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Le nom du modèle est requis.")]
+        [Display(Name = "Nom du modèle")]
         [StringLength(100, ErrorMessage = "Le nom du modèle ne doit pas dépasser 100 caractères.")]
         public string NomModele { get; set; }
 

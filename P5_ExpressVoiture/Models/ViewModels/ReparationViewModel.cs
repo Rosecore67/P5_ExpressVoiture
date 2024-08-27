@@ -10,10 +10,12 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public int VoitureID { get; set; }
 
         [Required(ErrorMessage = "La date de la réparation est requise.")]
+        [Display(Name = "Date de la réparation")]
         [DataType(DataType.Date)]
         public DateTime DateReparation { get; set; }
 
         [Required(ErrorMessage = "Le coût de la réparation est requis.")]
+        [Display(Name = "Coût de la réparation")]
         [Range(0, double.MaxValue, ErrorMessage = "Le coût doit être un nombre positif.")]
         public decimal CoutReparation { get; set; }
 

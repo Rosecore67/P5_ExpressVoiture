@@ -1,0 +1,17 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.ConfirmationViewModel
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div class="container text-center">
+
+    <h1>@Model.Message</h1>
+
+    <div>
+        <img src="@Model.ImageScreen" alt="Image de la voiture" class="img-fluid" />
+    </div>
+    
+    <a asp-action="Index" class="btn btn-primary">Retour à l'accueil</a>
+
+</div>

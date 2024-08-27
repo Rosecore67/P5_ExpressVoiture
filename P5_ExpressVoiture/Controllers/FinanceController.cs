@@ -11,11 +11,15 @@ namespace P5_ExpressVoiture.Controllers
     {
         private readonly IFinanceService _financeService;
         private readonly IVoitureService _voitureService;
+        private readonly IMarqueService _marqueService;
+        private readonly IModeleService _modeleService;
 
-        public FinanceController(IFinanceService financeService, IVoitureService voitureService)
+        public FinanceController(IFinanceService financeService, IVoitureService voitureService, IMarqueService marqueService, IModeleService modeleService)
         {
             _financeService = financeService;
             _voitureService = voitureService;
+            _marqueService = marqueService;
+            _modeleService = modeleService;
         }
 
         // GET: Finance/Index?voitureId=1
@@ -34,6 +38,19 @@ namespace P5_ExpressVoiture.Controllers
                 PrixAchat = finance.PrixAchat ?? 0,
                 PrixVente = finance.PrixVente ?? 0
             };
+
+            if (voiture == null)
+            {
+                return NotFound();
+            }
+
+            // Récupérer la marque et le modèle
+            var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+            var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
+
+            // Assigner le nom de la voiture au ViewBag
+            ViewBag.VoitureNom = $"{marque.NomMarque} {modele.NomModele}";
+
 
             return View(model);
         }

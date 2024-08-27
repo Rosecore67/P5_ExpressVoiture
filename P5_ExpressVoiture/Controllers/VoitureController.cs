@@ -105,7 +105,23 @@ namespace P5_ExpressVoiture.Controllers
 
                 await _voitureService.AddVoitureAsync(voiture);
 
-                return RedirectToAction("Index");
+                var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+                var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
+
+                // Générer le message de confirmation avec les noms récupérés
+                string message = $"{voiture.Année.Year} {marque?.NomMarque ?? "Marque inconnue"} {modele?.NomModele ?? "Modèle inconnu"} a bien été ajoutée";
+
+                // Si l'image est vide ou null, utiliser l'image par défaut
+                string imageScreen = string.IsNullOrEmpty(voiture.Image)
+                    ? Url.Content("~/images/default.png")
+                    : Url.Content("~/" + voiture.Image);
+
+                var confirmViewModel = new ConfirmationViewModel
+                {
+                    Message = message,
+                    ImageScreen = imageScreen
+                };
+                return RedirectToAction("Confirm", confirmViewModel);
             }
 
             model.Marques = await _marqueService.GetAllMarquesAsync();
@@ -203,6 +219,8 @@ namespace P5_ExpressVoiture.Controllers
 
                 await _voitureService.UpdateVoitureAsync(voiture);
 
+                TempData["SuccessMessage"] = "La voiture a été modifiée avec succès !";
+
                 return RedirectToAction("Index");
             }
 
@@ -256,7 +274,35 @@ namespace P5_ExpressVoiture.Controllers
 
             _voitureService.DeleteImage(voiture.Image);
             await _voitureService.DeleteVoitureAsync(id);
-            return RedirectToAction("Index");
+
+            var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+            var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
+
+            // Générer le message de confirmation avec les noms récupérés
+            string message = $"{voiture.Année.Year} {marque?.NomMarque ?? "Marque inconnue"} {modele?.NomModele ?? "Modèle inconnu"} a bien été supprimée";
+
+            // Si l'image est vide ou null, utiliser l'image par défaut
+            string imageScreen = string.IsNullOrEmpty(voiture.Image)
+                ? Url.Content("~/images/default.png")
+                : Url.Content("~/" + voiture.Image);
+
+            var confirmViewModel = new ConfirmationViewModel
+            {
+                Message = message,
+                ImageScreen = imageScreen
+            };
+            return RedirectToAction("Confirm", confirmViewModel);
+        }
+
+
+        public IActionResult Confirm(string message, string imageScreen)
+        {
+            var model = new ConfirmationViewModel
+            {
+                Message = message,
+                ImageScreen = imageScreen
+            };
+            return View(model);
         }
     }
 }

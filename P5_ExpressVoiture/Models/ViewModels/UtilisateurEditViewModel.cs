@@ -7,6 +7,7 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public string? Id { get; set; }
 
         [Required(ErrorMessage = "Le nom d'utilisateur est requis.")]
+        [Display(Name = "Nom de l'utilisateur")]
         public string NomUtilisateur { get; set; }
 
         [Required(ErrorMessage = "L'email est requis.")]
