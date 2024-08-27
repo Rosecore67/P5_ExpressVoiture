@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.ViewModels;
 
 namespace P5_ExpressVoiture.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ModeleController : Controller
     {
         private readonly IModeleService _modeleService;

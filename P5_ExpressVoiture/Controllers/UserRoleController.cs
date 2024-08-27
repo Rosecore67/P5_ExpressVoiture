@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.ViewModels;
 
 namespace P5_ExpressVoiture.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRoleController : Controller
     {
         private readonly IUserRoleService _roleService;
@@ -19,7 +21,6 @@ namespace P5_ExpressVoiture.Controllers
         {
             var roles = await _roleService.GetAllRolesAsync();
 
-            // Conversion de UserRole en UserRoleViewModel
             var model = roles.Select(role => new UserRoleViewModel
             {
                 Id = role.Id,

@@ -6,7 +6,6 @@ using P5_ExpressVoiture.Models.ViewModels;
 
 namespace P5_ExpressVoiture.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     public class VoitureController : Controller
     {
         private readonly IVoitureService _voitureService;

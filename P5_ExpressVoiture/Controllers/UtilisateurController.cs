@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.ViewModels;
 
 namespace P5_ExpressVoiture.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UtilisateurController : Controller
     {
         private readonly IUtilisateurService _utilisateurService;
@@ -32,7 +34,7 @@ namespace P5_ExpressVoiture.Controllers
                     NomUtilisateur = utilisateur.NomUtilisateur,
                     Roles = roles.Select(r => new UserRoleViewModel
                     {
-                        Id = r, // r ici est le nom du rôle
+                        Id = r,
                         NomRole = r
                     }).ToList()
                 };
@@ -167,7 +169,7 @@ namespace P5_ExpressVoiture.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            // Recharge les rôles si le modèle n'est pas valide pour réafficher la vue correctement
+
             model.Roles = (await _userRoleService.GetAllRolesAsync()).Select(r => new UserRoleViewModel
             {
                 Id = r.Id,

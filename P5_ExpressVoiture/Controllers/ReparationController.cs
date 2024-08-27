@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.Services;
@@ -6,6 +7,7 @@ using P5_ExpressVoiture.Models.ViewModels;
 
 namespace P5_ExpressVoiture.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReparationController : Controller
     {
         private readonly IReparationService _reparationService;
@@ -44,7 +46,7 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
-        // Create - Affiche le formulaire pour créer une réparation
+        // GET: Reparation/Index
         public async Task<IActionResult> Create(int voitureId)
         {
             var model = new ReparationViewModel
@@ -57,7 +59,7 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
-        // Create - Enregistre une nouvelle réparation
+        // POST: Reparation/Create
         [HttpPost]
         public async Task<IActionResult> Create(ReparationViewModel model)
         {
@@ -76,8 +78,7 @@ namespace P5_ExpressVoiture.Controllers
 
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });
             }
-
-            // Si la validation échoue, réinitialiser les TypeReparations pour les afficher à nouveau dans la vue
+            
             model.TypeReparations = await _typeReparationService.GetAllTypeReparationsAsync();
             return View(model);
         }
@@ -121,7 +122,6 @@ namespace P5_ExpressVoiture.Controllers
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });
             }
 
-            // Si la validation échoue, réinitialiser les TypeReparations pour les afficher à nouveau dans la vue
             model.TypeReparations = await _typeReparationService.GetAllTypeReparationsAsync();
             return View(model);
         }
