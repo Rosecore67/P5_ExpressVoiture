@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using P5_ExpressVoiture.Models.Entities;
 
 namespace P5_ExpressVoiture.Models.ViewModels
@@ -9,10 +8,12 @@ namespace P5_ExpressVoiture.Models.ViewModels
         public int Id { get; set; }
 
         [StringLength(17, ErrorMessage = "Le Code VIN doit comporter 17 caractères.")]
+        [Display(Name ="Code VIN")]
         public string? CodeVIN { get; set; }
 
         [Required(ErrorMessage = "L'année est requise.")]
         [DataType(DataType.Date)]
+        [Display(Name = "Date de mise en circulation")]
         public DateTime Année { get; set; }
 
         [Required(ErrorMessage = "La marque est requise.")]
@@ -26,9 +27,11 @@ namespace P5_ExpressVoiture.Models.ViewModels
 
         [Required(ErrorMessage = "La date d'achat est requise.")]
         [DataType(DataType.Date)]
+        [Display(Name = "Date d'achat")]
         public DateTime DateAchat { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Date de disponibilité de vente")]
         public DateTime DateDisponibiliteVente { get; set; }
 
         public bool EstDisponible { get; set; } = true;

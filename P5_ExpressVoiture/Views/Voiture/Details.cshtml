@@ -10,9 +10,12 @@
 <h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
 
 <img src="@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
-
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <p>Code VIN : @Model.CodeVIN</p>
+   <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p> 
+}
 <p>Finition : @Model.Finition</p>
-<p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
 <p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
 <p>Date de disponibilité à la vente : @Model.DateDisponibiliteVente.ToShortDateString()</p>
 <p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>

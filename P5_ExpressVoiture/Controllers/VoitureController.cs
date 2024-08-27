@@ -30,6 +30,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // GET: /Voiture/Index
         // Afficher la liste des voitures
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var voitures = await _voitureService.GetAllVoituresAsync();
@@ -47,11 +48,11 @@ namespace P5_ExpressVoiture.Controllers
                 var voiture = new VoitureIndexViewModel
                 {
                     Id = v.Id,
-                    CodeVIN = v.CodeVIN ?? "",
+                    CodeVIN = v.CodeVIN ?? "N'est pas renseigné",
                     Marque = marque.NomMarque ?? "Marque inconnue",
                     Modele = modele.NomModele ?? "Modele inconnu",
                     Année = v.Année,
-                    Finition = v.Finition ?? "",
+                    Finition = v.Finition ?? "N'est pas renseigné",
                     DateAchat = v.DateAchat,
                     DateDisponibiliteVente = v.DateDisponibiliteVente,
                     EstDisponible = v.EstDisponible,
@@ -132,6 +133,7 @@ namespace P5_ExpressVoiture.Controllers
 
         // GET: /Voiture/Details/1
         // Détails d'une voiture
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -146,11 +148,11 @@ namespace P5_ExpressVoiture.Controllers
             var model = new VoitureDetailsViewModel
             {
                 Id = voiture.Id,
-                CodeVIN = voiture.CodeVIN,
+                CodeVIN = voiture.CodeVIN ?? "N'est pas renseigné",
                 Marque = marque.NomMarque ?? "Marque inconnue",
                 Modele = modele.NomModele ?? "Modèle inconnu",
                 Année = voiture.Année,
-                Finition = voiture.Finition,
+                Finition = voiture.Finition ?? "N'est pas renseigné",
                 DateAchat = voiture.DateAchat,
                 DateDisponibiliteVente = voiture.DateDisponibiliteVente,
                 DateVente = voiture.DateVente,

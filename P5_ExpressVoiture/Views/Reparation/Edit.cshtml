@@ -1,8 +1,8 @@
 ﻿@model P5_ExpressVoiture.Models.ViewModels.ReparationViewModel
 
-<h2>Modifier une réparation</h2>
+<h2 class="form-title">Modifier une réparation</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" class="custom-form">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <input type="hidden" asp-for="Id" />
@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label asp-for="DateReparation" class="control-label"></label>
-        <input asp-for="DateReparation" class="form-control" />
+        <input asp-for="DateReparation" class="form-control" type="date" />
         <span asp-validation-for="DateReparation" class="text-danger"></span>
     </div>
 
@@ -28,6 +28,31 @@
         <span asp-validation-for="TypeReparationID" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a asp-action="Index" asp-route-voitureId="@Model.VoitureID" class="btn btn-secondary">Annuler</a>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+        <a asp-action="Index" asp-route-voitureId="@Model.VoitureID" class="btn btn-secondary custom-btn">Annuler</a>
+    </div>
 </form>
+
+@section Scripts {
+    @{
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Ouvrir le calendrier dès que l'utilisateur clique sur le champ
+                document.querySelectorAll('input[type="date"]').forEach(function (element) {
+                    element.addEventListener('focus', function () {
+                        this.showPicker();
+                    });
+                });
+
+                // Supprimer la valeur par défaut si c'est une date très ancienne
+                document.querySelectorAll('input[type="date"]').forEach(function (element) {
+                    if (element.value === "0001-01-01") {
+                        element.value = "";
+                    }
+                });
+            });
+        </script>
+    }
+}
+

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Ajouter une voiture";
 }
 
-<h1>Ajouter une voiture</h1>
+<h1 class="form-title">Ajouter une voiture</h1>
 
-<form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="Create" enctype="multipart/form-data" class="custom-form">
     <div class="form-group">
         <label asp-for="CodeVIN" class="control-label"></label>
         <input asp-for="CodeVIN" class="form-control" />
@@ -20,7 +20,7 @@
     <div class="form-group">
         <label asp-for="MarqueID" class="control-label">Marque</label>
         <select asp-for="MarqueID" class="form-control" asp-items="@(new SelectList(Model.Marques, "Id", "NomMarque"))">
-            <option value="">Sélectionnez une marque</option> <!-- Option de base -->
+            <option value="">Sélectionnez une marque</option>
         </select>
         <span asp-validation-for="MarqueID" class="text-danger"></span>
     </div>
@@ -43,16 +43,20 @@
     </div>
     <div class="form-group">
         <label asp-for="DateDisponibiliteVente" class="control-label"></label>
-        <input asp-for="DateDisponibiliteVente" class="form-control" />
+        <input asp-for="DateDisponibiliteVente" class="form-control" type="date" />
         <span asp-validation-for="DateDisponibiliteVente" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ImageFile" class="control-label">Image du véhicule</label>
-        <input asp-for="ImageFile" class="form-control" type="file" />
+        <input asp-for="ImageFile" class="form-control" type="file" onchange="previewImage(event)" />
         <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Ajouter" class="btn btn-primary" />
+        <img id="imagePreview" src="~/images/default.png" alt="Aperçu de l'image" class="image-preview" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Ajouter" class="btn btn-primary custom-btn" />
     </div>
 </form>
 
@@ -62,6 +66,35 @@
 
 @section Scripts {
     @{
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Ouvrir le calendrier dès que l'utilisateur clique sur le champ
+                document.querySelectorAll('input[type="date"]').forEach(function (element) {
+                    element.addEventListener('focus', function () {
+                        this.showPicker();
+                    });
+                });
+
+                // Supprimer la valeur par défaut si c'est une date très ancienne
+                document.querySelectorAll('input[type="date"]').forEach(function (element) {
+                    if (element.value === "0001-01-01") {
+                        element.value = "";
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var output = document.getElementById('imagePreview');
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

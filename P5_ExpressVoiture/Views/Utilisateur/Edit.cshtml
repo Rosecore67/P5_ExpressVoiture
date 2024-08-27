@@ -1,25 +1,27 @@
 ﻿@model P5_ExpressVoiture.Models.ViewModels.UtilisateurEditViewModel
 
-<h2>Modifier l'utilisateur</h2>
+<h2 class="form-title">Modifier l'utilisateur</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" class="custom-form">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
-        <label asp-for="Email"></label>
+        <label asp-for="Email" class="control-label"></label>
         <input asp-for="Email" class="form-control" readonly />
     </div>
 
     <div class="form-group">
-        <label asp-for="NomUtilisateur"></label>
+        <label asp-for="NomUtilisateur" class="control-label"></label>
         <input asp-for="NomUtilisateur" class="form-control" />
     </div>
 
     <div class="form-group">
-        <label asp-for="SelectedRoleId">Rôle</label>
+        <label asp-for="SelectedRoleId" class="control-label">Rôle</label>
         <select asp-for="SelectedRoleId" class="form-control" asp-items="@(new SelectList(Model.Roles, "Id", "NomRole"))"></select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+        <a asp-action="Index" class="btn btn-secondary custom-btn">Annuler</a>
+    </div>
 </form>

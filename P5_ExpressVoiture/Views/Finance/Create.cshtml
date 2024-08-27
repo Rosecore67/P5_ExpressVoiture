@@ -1,8 +1,8 @@
 ﻿@model P5_ExpressVoiture.Models.ViewModels.FinanceViewModel
 
-<h2>Ajouter des informations financières</h2>
+<h2 class="form-title">Ajouter des informations financières</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" class="custom-form">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <input type="hidden" asp-for="VoitureID" />
@@ -13,6 +13,8 @@
         <span asp-validation-for="PrixAchat" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a asp-action="Index" asp-route-voitureId="@Model.VoitureID" class="btn btn-secondary">Annuler</a>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+        <a asp-action="Index" asp-route-voitureId="@Model.VoitureID" class="btn btn-secondary custom-btn">Annuler</a>
+    </div>
 </form>

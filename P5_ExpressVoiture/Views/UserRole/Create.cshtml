@@ -1,16 +1,18 @@
 ﻿@model P5_ExpressVoiture.Models.ViewModels.UserRoleViewModel
 
-<h2>Créer un nouveau rôle</h2>
+<h2 class="form-title">Créer un nouveau rôle</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" class="custom-form">
     <div class="form-group">
-        <label asp-for="NomRole"></label>
+        <label asp-for="NomRole" class="control-label"></label>
         <input asp-for="NomRole" class="form-control" />
         <span asp-validation-for="NomRole" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Créer</button>
-    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Créer</button>
+        <a asp-action="Index" class="btn btn-secondary custom-btn">Annuler</a>
+    </div>
 </form>
 
 @section Scripts {

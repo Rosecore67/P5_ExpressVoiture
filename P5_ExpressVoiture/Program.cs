@@ -131,23 +131,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Voiture}/{action=Index}/{id?}");
 app.MapRazorPages();
-
-// Rediriger vers la page de login
-app.Use(async (context, next) =>
-{
-    if (!context.User.Identity.IsAuthenticated && !context.Request.Path.StartsWithSegments("/Identity/Account/Login"))
-    {
-        context.Response.Redirect("/Identity/Account/Login");
-        return;
-    }
-
-    await next();
-});
 
 app.Run();
 
