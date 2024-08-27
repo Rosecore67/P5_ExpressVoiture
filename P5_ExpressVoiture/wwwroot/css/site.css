@@ -70,3 +70,57 @@ body {
         background-color: #8f6a44;
         border-color: #8f6a44;
     }
+
+.details-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.image-section {
+    flex: 1;
+    text-align: center;
+    margin-right: 40px;
+}
+
+.voiture-image {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain; /* Important pour ajuster l'image sans la couper */
+    border-radius: 8px;
+}
+
+.details-section {
+    flex: 1;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+    .details-section h1 {
+        font-size: 24px;
+        color: #5a4d4d;
+    }
+
+    .details-section p {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+    .back-link:hover {
+        text-decoration: underline;
+    }

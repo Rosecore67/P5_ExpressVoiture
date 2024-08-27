@@ -7,27 +7,35 @@
     ViewData["Title"] = $"{Model.Marque} {Model.Modele}";
 }
 
-<h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
+<div class="details-container">
+    <div class="image-section">
+        <img src="@Model.Image" alt="Image de la voiture" class="img-fluid voiture-image" />
+        <a asp-action="Index" class="btn btn-primary custom-btn">← Retour</a>
+    </div>
 
-<img src="@Model.Image" alt="Image de la voiture" class="img-thumbnail mb-4" />
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
-    <p>Code VIN : @Model.CodeVIN</p>
-   <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p> 
-}
-<p>Finition : @Model.Finition</p>
-<p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
-<p>Date de disponibilité à la vente : @Model.DateDisponibiliteVente.ToShortDateString()</p>
-<p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>
+    <div class="details-section">
+        <h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
 
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
-    <hr />
-    <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Finances</a>
-    <a asp-controller="Reparation"  class="btn btn-info">Réparations</a>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
-}
-<div class="mt-4">
-    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <p>Code VIN : @Model.CodeVIN</p>
+            <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
+        }
+
+        <p>Finition : @Model.Finition</p>
+        <p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
+        <p>Date de disponibilité à la vente : @Model.DateDisponibiliteVente.ToShortDateString()</p>
+        <p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <hr />
+            <div class="admin-actions">
+                <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Finances</a>
+                <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-info">Réparations</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
+            </div>
+        }
+    </div>
 </div>

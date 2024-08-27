@@ -2,7 +2,9 @@
 
 <h2>Gestion des Finances pour @ViewBag.VoitureNom</h2>
 
-<p>Le prix de vente est automatiquement calculé (Prix d'achat + Coût des réparations + Marge de 500€). Seul le prix d'achat est à ajouter</p>
+<p>Le prix de vente est automatiquement calculé (Prix d'achat + Coût des réparations + Marge de 500€).</p>
+<p>Sont à ajouter le prix d'achat ainsi que les différents coûts de réparation.</p>
+
 <table class="table">
     <tr>
         <th>Prix d'Achat</th>
@@ -16,3 +18,4 @@
 
 <a asp-controller="Finance" asp-action="Edit" asp-route-voitureId="@Model.VoitureID" class="btn btn-warning">Modifier</a>
 <a asp-controller="Voiture" asp-action="Index" class="btn btn-secondary">Retour à la liste des voitures</a>
+<a asp-controller="Voiture" asp-action="Details" asp-route-id="@Model.VoitureID" class="btn btn-secondary">Retour aux détails de la voiture</a>
