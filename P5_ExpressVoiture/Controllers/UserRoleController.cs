@@ -46,6 +46,7 @@ namespace P5_ExpressVoiture.Controllers
                 var result = await _roleService.CreateRoleAsync(role);
                 if (result.Succeeded)
                 {
+                    TempData["SuccessMessage"] = "Le rôle a été ajoutée avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -94,6 +95,7 @@ namespace P5_ExpressVoiture.Controllers
                 var result = await _roleService.UpdateRoleAsync(role);
                 if (result.Succeeded)
                 {
+                    TempData["SuccessMessage"] = "Le rôle a été modifiée avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -119,6 +121,7 @@ namespace P5_ExpressVoiture.Controllers
             var result = await _roleService.DeleteRoleAsync(role);
             if (result.Succeeded)
             {
+                TempData["SuccessMessage"] = "Le rôle a été supprimée avec succès !";
                 return RedirectToAction(nameof(Index));
             }
 

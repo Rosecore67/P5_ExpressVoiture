@@ -40,6 +40,8 @@ namespace P5_ExpressVoiture.Controllers
                     NomTypeReparation = model.NomTypeReparation
                 };
                 await _typeReparationService.AddTypeReparationAsync(typeReparation);
+
+                TempData["SuccessMessage"] = "Le type de réparation a été ajoutée avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
             return View(model);
@@ -76,6 +78,8 @@ namespace P5_ExpressVoiture.Controllers
                 };
 
                 await _typeReparationService.UpdateTypeReparationAsync(typeReparation);
+
+                TempData["SuccessMessage"] = "Le type de réparation a été modifiée avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
             return View(model);
@@ -86,6 +90,8 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _typeReparationService.DeleteTypeReparationAsync(id);
+
+            TempData["SuccessMessage"] = "Le type de réparation a été supprimée avec succès !";
             return RedirectToAction("Index", "Admin");
         }
     }

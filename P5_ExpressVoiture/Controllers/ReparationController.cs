@@ -76,6 +76,7 @@ namespace P5_ExpressVoiture.Controllers
 
                 await _reparationService.AddReparationAsync(reparation);
 
+                TempData["SuccessMessage"] = "La réparation a été ajoutée avec succès !";
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });
             }
             
@@ -119,6 +120,7 @@ namespace P5_ExpressVoiture.Controllers
 
                 await _reparationService.UpdateReparationAsync(reparation);
 
+                TempData["SuccessMessage"] = "La réparation a été modifiée avec succès !";
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });
             }
 
@@ -131,6 +133,8 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id, int voitureId)
         {
             await _reparationService.DeleteReparationAsync(id);
+
+            TempData["SuccessMessage"] = "La réparation a été supprimée avec succès !";
             return RedirectToAction("Index", new { voitureId });
         }
     }

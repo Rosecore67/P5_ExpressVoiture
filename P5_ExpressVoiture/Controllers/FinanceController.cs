@@ -76,6 +76,8 @@ namespace P5_ExpressVoiture.Controllers
                 };
 
                 await _financeService.AddFinanceAsync(finance);
+
+                TempData["SuccessMessage"] = "La finance du véhicule a été ajoutée avec succès !";
                 return RedirectToAction("Index", "Voiture");
             }
             return View(model);
@@ -117,6 +119,8 @@ namespace P5_ExpressVoiture.Controllers
                 finance.PrixVente = model.PrixVente;
 
                 await _financeService.UpdateFinanceAsync(finance);
+
+                TempData["SuccessMessage"] = "La finance du véhicule a été modifiée avec succès !";
                 return RedirectToAction("Index", new { voitureId = model.VoitureID });
             }
             return View(model);
@@ -127,6 +131,8 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id, int voitureId)
         {
             await _financeService.DeleteFinanceAsync(id);
+
+            TempData["SuccessMessage"] = "La finance du véhicule a été supprimée avec succès !";
             return RedirectToAction("Index", "Voiture");
         }
     }

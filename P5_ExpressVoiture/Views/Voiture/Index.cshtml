@@ -31,25 +31,18 @@
                         Disponibilité : @(voiture.EstDisponible ? "Disponible" : "Non disponible")<br />
                         Prix : @(voiture.PrixVente?.ToString("C") ?? "Prix non disponible")<br />                        
                     </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a asp-action="Details" asp-route-id="@voiture.Id" class="btn btn-sm btn-outline-secondary">Voir les détails</a>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <a asp-action="Details" asp-route-id="@voiture.Id" class="btn btn-sm btn-outline-secondary mb-2 mr-2">Voir les détails</a>
 
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-info">Gestion Finances</a>
-                            <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-info">Gestion Réparations</a>
-                            <a asp-action="Edit" asp-route-id="@voiture.Id" class="btn btn-sm btn-warning">Modifier</a>
-                            <a asp-action="Delete" asp-route-id="@voiture.Id" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-sm btn-info mb-2 mr-2">Finances</a>
+                            <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-sm btn-info mb-2 mr-2">Réparations</a>
+                            <a asp-action="Edit" asp-route-id="@voiture.Id" class="btn btn-sm btn-warning mb-2 mr-2">Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@voiture.Id" class="btn btn-sm btn-danger mb-2 mr-2">Supprimer</a>
                         }
                     </div>
                 </div>
             </div>
-        </div>
-    }
-
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
         </div>
     }

@@ -79,6 +79,7 @@ namespace P5_ExpressVoiture.Controllers
                     // Assigner automatiquement le rôle "Visiteur" à chaque nouvel utilisateur
                     await _utilisateurService.AddToRoleAsync(utilisateur, "Visiteur");
 
+                    TempData["SuccessMessage"] = "L'utilisateur a été ajoutée avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -161,6 +162,7 @@ namespace P5_ExpressVoiture.Controllers
                         await _utilisateurService.AddToRoleAsync(utilisateur, role.NomRole);
                     }
 
+                    TempData["SuccessMessage"] = "L'utilisateur a été modifiée avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -193,6 +195,7 @@ namespace P5_ExpressVoiture.Controllers
             var result = await _utilisateurService.DeleteUtilisateurAsync(utilisateur);
             if (result.Succeeded)
             {
+                TempData["SuccessMessage"] = "L'utilisateur a été supprimée avec succès !";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -224,6 +227,7 @@ namespace P5_ExpressVoiture.Controllers
 
                 if (result.Succeeded)
                 {
+                    TempData["SuccessMessage"] = "Le mot de passe de l'utilisateur a été modifiée avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 

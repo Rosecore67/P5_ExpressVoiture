@@ -40,6 +40,7 @@ namespace P5_ExpressVoiture.Controllers
                     NomMarque = model.NomMarque
                 };
                 await _marqueService.AddMarqueAsync(marque);
+                TempData["SuccessMessage"] = "La marque a été créée avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
             return View(model);
@@ -76,6 +77,8 @@ namespace P5_ExpressVoiture.Controllers
                 };
 
                 await _marqueService.UpdateMarqueAsync(marque);
+
+                TempData["SuccessMessage"] = "La marque a été mise à jour avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
 
@@ -87,6 +90,8 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _marqueService.DeleteMarqueAsync(id);
+
+            TempData["SuccessMessage"] = "La marque a été supprimée avec succès !";
             return RedirectToAction("Index", "Admin");
         }
     }

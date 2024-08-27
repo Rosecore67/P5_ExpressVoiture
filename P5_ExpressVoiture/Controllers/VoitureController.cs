@@ -121,6 +121,7 @@ namespace P5_ExpressVoiture.Controllers
                     Message = message,
                     ImageScreen = imageScreen
                 };
+                TempData["SuccessMessage"] = "La voiture a été ajoutée avec succès !";
                 return RedirectToAction("Confirm", confirmViewModel);
             }
 
@@ -291,6 +292,7 @@ namespace P5_ExpressVoiture.Controllers
                 Message = message,
                 ImageScreen = imageScreen
             };
+            TempData["SuccessMessage"] = "La voiture a été supprimée avec succès !";
             return RedirectToAction("Confirm", confirmViewModel);
         }
 

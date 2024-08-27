@@ -40,6 +40,8 @@ namespace P5_ExpressVoiture.Controllers
                     NomModele = model.NomModele
                 };
                 await _modeleService.AddModeleAsync(modele);
+
+                TempData["SuccessMessage"] = "Le modèle a été créée avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
             return View(model);
@@ -76,6 +78,8 @@ namespace P5_ExpressVoiture.Controllers
                 };
 
                 await _modeleService.UpdateModeleAsync(modele);
+
+                TempData["SuccessMessage"] = "Le modèle a été modifiée avec succès !";
                 return RedirectToAction("Index", "Admin");
             }
 
@@ -87,6 +91,8 @@ namespace P5_ExpressVoiture.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _modeleService.DeleteModeleAsync(id);
+
+            TempData["SuccessMessage"] = "Le modèle a été supprimée avec succès !";
             return RedirectToAction("Index", "Admin");
         }
     }
