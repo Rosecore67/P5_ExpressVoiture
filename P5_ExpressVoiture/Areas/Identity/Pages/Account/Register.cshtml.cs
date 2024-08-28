@@ -47,24 +47,24 @@ namespace P5_ExpressVoiture.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Un nom doit être renseigné")]
             [Display(Name = "Nom d'utilisateur")]
             public string NomUtilisateur { get; set; }  // Ajout de NomUtilisateur
 
-            [Required]
+            [Required(ErrorMessage = "Un email doit être renseigné")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Le mot de passe doit être renseigné")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Mot de Passe")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirmer mot de passe")]
-            [Compare("Password", ErrorMessage = "Le mote de passe et sa confirmation ne sont pas identiques.")]
+            [Display(Name = "Confirmer le mot de passe")]
+            [Compare("Password", ErrorMessage = "Le mot de passe et sa confirmation ne sont pas identiques.")]
             public string ConfirmPassword { get; set; }
         }
 

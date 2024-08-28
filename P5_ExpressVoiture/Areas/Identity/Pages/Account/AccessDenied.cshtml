@@ -1,0 +1,14 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Accès Refusé";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">Vous n'avez pas accès à cette page.</p>
+</header>
+
+<div>
+    <a asp-controller="Voiture" asp-action="Index" class="btn btn-secondary">Retour à la liste des voitures</a>
+</div>
