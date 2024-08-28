@@ -15,9 +15,13 @@ Table des matières
 Fonctionnalités
 
   Ajouter, modifier et supprimer des voitures.
+  
   Gérer les réparations et les finances des véhicules.
+  
   Gestion des utilisateurs et des rôles (Admin, Visiteur).
+  
   Authentification avec gestion des rôles pour sécuriser certaines fonctionnalités.
+  
   Affichage conditionnel des informations en fonction des droits de l'utilisateur.
 
 Prérequis
@@ -25,8 +29,11 @@ Prérequis
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
   .NET 6.0 SDK
+  
   SQL Server ou une autre base de données compatible
+  
   Un éditeur de code comme Visual Studio ou Visual Studio Code
+  
 
 Installation
 
