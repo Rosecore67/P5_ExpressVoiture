@@ -68,8 +68,8 @@
 
 @section Scripts {
     @{
-        <script scr="~/js/gestionVoiture.js"></script>
-        <script scr="~/js/gestionDateCalendrier"></script>
+        <script src="~/js/gestionVoiture.js" asp-append-version="true"></script>
+        <script src="~/js/gestionDateCalendrier.js" asp-append-version="true"></script>
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

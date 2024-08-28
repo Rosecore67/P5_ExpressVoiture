@@ -1,4 +1,5 @@
-﻿    // Gestion de la disponibilité et de la date de disponibilité
+﻿document.addEventListener('DOMContentLoaded', function () {
+    // Gestion de la disponibilité et de la date de disponibilité
     var estDisponibleSelect = document.querySelector('select[name="EstDisponible"]');
     var dateDisponibiliteInput = document.querySelector('input[name="DateDisponibiliteVente"]');
 
@@ -12,8 +13,10 @@
         }
     }
 
+    // Ajout de l'événement de changement et initialisation
     estDisponibleSelect.addEventListener('change', toggleDateDisponibiliteValidation);
-    toggleDateDisponibiliteValidation(); // Initial call to set the correct state
+    toggleDateDisponibiliteValidation(); // Initialisation de l'état correct
+});
 
     // Prévisualisation de l'image
     function previewImage(event) {
@@ -27,4 +30,3 @@
     }
 
     document.querySelector('input[type="file"]').addEventListener('change', previewImage);
-});

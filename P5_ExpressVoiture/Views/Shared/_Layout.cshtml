@@ -66,19 +66,21 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var successMessage = '@TempData["SuccessMessage"]';
-            if (successMessage) {
+
+    @if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
                 var toastElement = document.getElementById('successToast');
                 var toast = new bootstrap.Toast(toastElement, {
                     autohide: true,
                     delay: 3000 // Le toast disparaît après 3 secondes
                 });
                 toast.show();
-            }
-        });
-    </script>
+            });
+        </script>
+    }
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
