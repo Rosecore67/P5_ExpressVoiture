@@ -38,6 +38,14 @@
         <input asp-for="DateAchat" class="form-control" type="date" />
         <span asp-validation-for="DateAchat" class="text-danger"></span>
     </div>
+        <div class="form-group">
+        <label asp-for="EstDisponible" class="control-label">Disponibilité</label>
+        <select asp-for="EstDisponible" class="form-control">
+            <option value="true" >Disponible</option>
+            <option value="false" >Indisponible</option>
+        </select>
+        <span asp-validation-for="EstDisponible" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="DateDisponibiliteVente" class="control-label"></label>
         <input asp-for="DateDisponibiliteVente" class="form-control" type="date" />
@@ -89,6 +97,27 @@
                 reader.readAsDataURL(event.target.files[0]);
             }
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var estDisponibleSelect = document.querySelector('select[name="EstDisponible"]');
+                var dateDisponibiliteInput = document.querySelector('input[name="DateDisponibiliteVente"]');
+
+                function toggleDateDisponibiliteValidation() {
+                    if (estDisponibleSelect.value === "false") {
+                        dateDisponibiliteInput.removeAttribute('required');
+                        dateDisponibiliteInput.setAttribute('disabled', 'disabled');
+                    } else {
+                        dateDisponibiliteInput.setAttribute('required', 'required');
+                        dateDisponibiliteInput.removeAttribute('disabled');
+                    }
+                }
+
+                estDisponibleSelect.addEventListener('change', toggleDateDisponibiliteValidation);
+                toggleDateDisponibiliteValidation(); // Initial call to set the correct state
+            });
+        </script>
+
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

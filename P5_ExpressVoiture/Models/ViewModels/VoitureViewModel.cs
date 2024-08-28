@@ -29,12 +29,13 @@ namespace P5_ExpressVoiture.Models.ViewModels
         [DataType(DataType.Date)]
         [Display(Name = "Date d'achat")]
         public DateTime DateAchat { get; set; }
-
+       
         [DataType(DataType.Date)]
         [Display(Name = "Date de disponibilité de vente")]
         public DateTime DateDisponibiliteVente { get; set; }
 
-        public bool EstDisponible { get; set; } = true;
+        [Display(Name = "Disponibilité du véhicule à la vente")]
+        public bool EstDisponible { get; set; }
 
         public string? Image { get; set; }
 

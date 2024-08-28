@@ -155,3 +155,110 @@ body {
     .btn-reparations:hover {
         background-color: #925f2a;
     }
+
+.border-success {
+    border: 2px solid green;
+}
+
+.border-danger {
+    border: 2px solid red;
+}
+
+/*Page de Login*/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #4b2e83; /* Custom color for your title */
+}
+
+.login-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.or-text {
+    margin: 0 1rem;
+}
+
+.login-footer {
+    margin-top: 1rem;
+}
+
+.custom-btn-login {
+    background-color: #c19a6b; /* Custom color for your buttons */
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+    .custom-btn-login:hover {
+        background-color: #a67b5b; /* Darker shade on hover */
+    }
+
+    /*Page d'inscription*/
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.register-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #4b2e83; /* Custom color for your title */
+}
+
+.register-form .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.custom-btn-register {
+    background-color: #c19a6b; /* Custom color for your buttons */
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+    .custom-btn-register:hover {
+        background-color: #a67b5b; /* Darker shade on hover */
+    }

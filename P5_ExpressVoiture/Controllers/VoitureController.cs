@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
 using P5_ExpressVoiture.Models.ViewModels;
@@ -90,6 +91,12 @@ namespace P5_ExpressVoiture.Controllers
             if (ModelState.IsValid)
             {
                 string imagePath = await _voitureService.UploadImageAsync(model.ImageFile);
+
+                // Si EstDisponible est false, mettez la date de disponibilité de vente à 01/01/0001
+                if (!model.EstDisponible)
+                {
+                    model.DateDisponibiliteVente = DateTime.MinValue;
+                }
 
                 var voiture = new Voiture
                 {
@@ -204,6 +211,12 @@ namespace P5_ExpressVoiture.Controllers
             {
                 var voiture = await _voitureService.GetVoitureByIdAsync(id);
                 if (voiture == null) return NotFound();
+
+                // Si EstDisponible est false, mettez la date de disponibilité de vente à 01/01/0001
+                if (!model.EstDisponible)
+                {
+                    model.DateDisponibiliteVente = DateTime.MinValue;                    
+                }
 
                 voiture.CodeVIN = model.CodeVIN;
                 voiture.MarqueID = model.MarqueID;

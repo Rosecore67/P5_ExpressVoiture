@@ -22,15 +22,15 @@
     @foreach (var voiture in Model)
     {
         <div class="col-md-4">
-            <div class="card mb-4 box-shadow" style="height: 500px;">
+            <div class="card mb-4 box-shadow @(voiture.EstDisponible ? "border-success" : "border-danger")" style="height: 500px;">
                 <img class="card-img-top" src="@Url.Content(voiture.Image)" alt="Image de @voiture.Marque @voiture.Modele" style="height: 200px; object-fit: cover;">
                 <div class="card-body" style="height: 260px; overflow: hidden;">
                     <h5 class="card-title">@voiture.Marque @voiture.Modele</h5>
                     <p class="card-text">
+                        Disponibilité : @(voiture.EstDisponible ? "Disponible" : "Non disponible")<br />
                         Année : @voiture.Année.Year<br />
                         Finition : @voiture.Finition<br />
-                        Date de disponibilité à la vente : @voiture.DateDisponibiliteVente.ToShortDateString()<br />
-                        Disponibilité : @(voiture.EstDisponible ? "Disponible" : "Non disponible")<br />
+                        Date de disponibilité à la vente : @(voiture.DateDisponibiliteVente == DateTime.MinValue ? "--/--/----" : voiture.DateDisponibiliteVente.ToShortDateString())<br />                       
                         Prix : @(voiture.PrixVente?.ToString("C") ?? "Prix non disponible")<br />
                     </p>
                    
