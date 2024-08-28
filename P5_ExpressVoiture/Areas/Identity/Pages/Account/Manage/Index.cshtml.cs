@@ -60,10 +60,11 @@ namespace P5_ExpressVoiture.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(Utilisateur user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
+            var nomUtilisateur = user.NomUtilisateur; // Récupération du NomUtilisateur
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
+            // Remplacer Username par NomUtilisateur
+            Username = nomUtilisateur;
 
             Input = new InputModel
             {

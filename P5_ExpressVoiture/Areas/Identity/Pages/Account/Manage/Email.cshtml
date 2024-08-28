@@ -14,7 +14,7 @@
             @if (Model.IsEmailConfirmed)
             {
                 <div class="form-floating mb-3 input-group">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                    <input asp-for="Email" class="form-control" placeholder="Veuillez entrer votre email." disabled />
                         <div class="input-group-append">
                             <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
                         </div>
@@ -24,7 +24,7 @@
             else
             {
                 <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                    <input asp-for="Email" class="form-control" placeholder="Veuillez entrer votre email." disabled />
                     <label asp-for="Email" class="form-label"></label>
                     <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Envoi d'un email de vérification</button>
                 </div>

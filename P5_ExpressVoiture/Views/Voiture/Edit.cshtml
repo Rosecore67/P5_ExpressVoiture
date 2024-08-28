@@ -68,56 +68,8 @@
 
 @section Scripts {
     @{
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Ouvrir le calendrier dès que l'utilisateur clique sur le champ
-                document.querySelectorAll('input[type="date"]').forEach(function (element) {
-                    element.addEventListener('focus', function () {
-                        this.showPicker();
-                    });
-                });
-
-                // Supprimer la valeur par défaut si c'est une date très ancienne
-                document.querySelectorAll('input[type="date"]').forEach(function (element) {
-                    if (element.value === "0001-01-01") {
-                        element.value = "";
-                    }
-                });
-            });
-        </script>
-
-        <script>
-            function previewImage(event) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var output = document.getElementById('imagePreview');
-                    output.src = reader.result;
-                    output.style.display = 'block';
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        </script>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var estDisponibleSelect = document.querySelector('select[name="EstDisponible"]');
-                var dateDisponibiliteInput = document.querySelector('input[name="DateDisponibiliteVente"]');
-
-                function toggleDateDisponibiliteValidation() {
-                    if (estDisponibleSelect.value === "false") {
-                        dateDisponibiliteInput.removeAttribute('required');
-                        dateDisponibiliteInput.setAttribute('disabled', 'disabled');
-                    } else {
-                        dateDisponibiliteInput.setAttribute('required', 'required');
-                        dateDisponibiliteInput.removeAttribute('disabled');
-                    }
-                }
-
-                estDisponibleSelect.addEventListener('change', toggleDateDisponibiliteValidation);
-                toggleDateDisponibiliteValidation(); // Initial call to set the correct state
-            });
-        </script>
-
+        <script scr="~/js/gestionVoiture.js"></script>
+        <script scr="~/js/gestionDateCalendrier"></script>
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
