@@ -24,7 +24,7 @@ Prérequis
 
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
-    .NET 6.0 SDK
+    .NET 8.0 SDK
     SQL Server ou une autre base de données compatible
     Un éditeur de code comme Visual Studio ou Visual Studio Code
 
