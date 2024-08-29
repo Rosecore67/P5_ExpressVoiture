@@ -32,7 +32,7 @@ Installation
 
    1. Clonez le dépôt depuis GitHub :
 
-git clone https://github.com/votre-nom-utilisateur/express-voitures.git
+git clone https://github.com/NomUtilisateur/P5_ExpressVoiture.git
 cd express-voitures
 
    2. Restaurez les dépendances du projet :
