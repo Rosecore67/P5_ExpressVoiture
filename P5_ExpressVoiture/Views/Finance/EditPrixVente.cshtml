@@ -4,13 +4,13 @@
     ViewData["Title"] = "Modifier Prix de Vente";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2 class="form-title">@ViewData["Title"]</h2>
 
 <div class="alert alert-warning">
     <strong>Attention:</strong> Vous pouvez modifier le prix de vente mais si vous ajoutez des réparations ou modifiez le prix d'achat, le calcul automatisé remplacera votre montant. Veillez à bien renseigner à nouveau le prix de vente.
 </div>
 
-<form asp-action="EditPrixVente">
+<form asp-action="EditPrixVente" class="custom-form">
     <div class="form-group">
         <label asp-for="PrixVente" class="control-label"></label>
         <input asp-for="PrixVente" class="form-control" />
@@ -20,8 +20,8 @@
     <input type="hidden" asp-for="FinanceID" />
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Sauvegarder</button>
-        <a asp-action="Details" asp-controller="Voiture" asp-route-id="@Model.VoitureID" class="btn btn-secondary">Annuler</a>
+        <button type="submit" class="btn btn-primary custom-btn">Sauvegarder</button>
+        <a asp-action="Details" asp-controller="Voiture" asp-route-id="@Model.VoitureID" class="btn custom-btn-secondary">Annuler</a>
     </div>
 </form>
 
