@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public string NomTypeReparation { get; set; }
+        public bool SoftDelete { get; set; }
     }
 }

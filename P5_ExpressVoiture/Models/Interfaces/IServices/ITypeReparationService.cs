@@ -6,6 +6,7 @@ namespace P5_ExpressVoiture.Models.Interfaces.IServices
     {
         Task<IEnumerable<TypeReparation>> GetAllTypeReparationsAsync();
         Task<TypeReparation> GetTypeReparationByIdAsync(int id);
+        Task<TypeReparation> GetMarqueByIdIncludingSoftDeletedAsync(int id);
         Task AddTypeReparationAsync(TypeReparation typeReparation);
         Task UpdateTypeReparationAsync(TypeReparation typeReparation);
         Task DeleteTypeReparationAsync(int id);
