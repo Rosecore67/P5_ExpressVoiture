@@ -126,6 +126,48 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditPrixVente(int voitureId)
+        {
+            var finance = await _financeService.GetFinanceByVoitureIdAsync(voitureId);
+            if (finance == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditPrixVenteViewModel
+            {
+                VoitureID = voitureId,
+                PrixVente = finance.PrixVente ?? 0
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> EditPrixVente(EditPrixVenteViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var finance = await _financeService.GetFinanceByVoitureIdAsync(model.VoitureID);
+                if (finance == null)
+                {
+                    return NotFound();
+                }
+
+                finance.PrixVente = model.PrixVente;
+
+                await _financeService.UpdateFinanceAsync(finance);
+
+                TempData["SuccessMessage"] = "Le prix de vente a été mis à jour avec succès.";
+                return RedirectToAction("Details", "Voiture", new { id = model.VoitureID });
+            }
+
+            return View(model);
+        }
+
         // POST: Finance/Delete/1
         [HttpPost]
         public async Task<IActionResult> Delete(int id, int voitureId)

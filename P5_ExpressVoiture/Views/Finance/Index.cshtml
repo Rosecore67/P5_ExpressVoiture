@@ -16,6 +16,7 @@
     </tr>
 </table>
 
-<a asp-controller="Finance" asp-action="Edit" asp-route-voitureId="@Model.VoitureID" class="btn btn-warning">Modifier</a>
+<a asp-controller="Finance" asp-action="Edit" asp-route-voitureId="@Model.VoitureID" class="btn btn-warning">Modifier Prix d'achat</a>
+<a asp-controller="Finance" asp-action="EditPrixVente" asp-route-voitureId="@Model.VoitureID" class="btn btn-warning">Modifier Prix de vente</a>
 <a asp-controller="Voiture" asp-action="Index" class="btn btn-secondary">Retour à la liste des voitures</a>
 <a asp-controller="Voiture" asp-action="Details" asp-route-id="@Model.VoitureID" class="btn btn-secondary">Retour aux détails de la voiture</a>
