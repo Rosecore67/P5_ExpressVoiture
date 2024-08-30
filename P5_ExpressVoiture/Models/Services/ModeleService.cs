@@ -18,6 +18,11 @@ namespace P5_ExpressVoiture.Models.Services
             return await _modeleRepository.GetAllAsync();
         }
 
+        public async Task<Modele> GetMarqueByIdIncludingSoftDeletedAsync(int id)
+        {
+            return await _modeleRepository.GetByIdIncludingSoftDeletedAsync(id);
+        }
+
         public async Task<Modele> GetModeleByIdAsync(int id)
         {
             return await _modeleRepository.GetByIdAsync(id);
