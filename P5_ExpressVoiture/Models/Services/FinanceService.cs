@@ -51,6 +51,12 @@ namespace P5_ExpressVoiture.Models.Services
             await _financeRepository.SaveChangesAsync();
         }
 
+        public async Task UpdateFinancePrixVenteAsync(Finance finance)
+        {
+            _financeRepository.Update(finance);
+            await _financeRepository.SaveChangesAsync();
+        }
+
         public async Task DeleteFinanceAsync(int id)
         {
             var finance = await _financeRepository.GetByIdAsync(id);
