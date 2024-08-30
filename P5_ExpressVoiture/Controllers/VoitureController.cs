@@ -40,7 +40,7 @@ namespace P5_ExpressVoiture.Controllers
 
             foreach (var v in voitures)
             {
-                var marque = await _marqueService.GetMarqueByIdAsync(v.MarqueID);
+                var marque = await _marqueService.GetMarqueByIdIncludingSoftDeletedAsync(v.MarqueID);
                 var modele = await _modeleService.GetModeleByIdAsync(v.ModeleID);
                 var coutClient = await _financeService.GetFinanceByVoitureIdAsync(v.Id);
                 var prixVente = coutClient?.PrixVente ?? 0;
@@ -146,7 +146,7 @@ namespace P5_ExpressVoiture.Controllers
         {
             var voiture = await _voitureService.GetVoitureByIdAsync(id);
             if (voiture == null) return NotFound();
-            var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
+            var marque = await _marqueService.GetMarqueByIdIncludingSoftDeletedAsync(voiture.MarqueID);
             var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
             var coutClient = await _financeService.GetFinanceByVoitureIdAsync(voiture.Id);
             var prixVente = coutClient?.PrixVente ?? 0;

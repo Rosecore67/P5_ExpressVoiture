@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public string NomMarque { get; set; }
+        public bool SoftDelete { get; set; }
     }
 }

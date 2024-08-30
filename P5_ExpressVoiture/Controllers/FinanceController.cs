@@ -126,6 +126,7 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
+        // GET : Finance/EditPrixVente/1
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditPrixVente(int voitureId)
@@ -146,6 +147,7 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
+        //POST : Finance/EditPrixVente/1
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditPrixVente(EditPrixVenteViewModel model)

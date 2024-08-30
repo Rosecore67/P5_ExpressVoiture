@@ -15,12 +15,12 @@ namespace P5_ExpressVoiture.Models.Repositories
             _entities = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _entities.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await _entities.FindAsync(id);
         }
@@ -36,7 +36,7 @@ namespace P5_ExpressVoiture.Models.Repositories
             _entities.Update(entity);
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             _entities.Remove(entity);
         }

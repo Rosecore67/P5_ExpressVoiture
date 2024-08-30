@@ -6,6 +6,7 @@ namespace P5_ExpressVoiture.Models.Interfaces.IServices
     {
         Task<IEnumerable<Marque>> GetAllMarquesAsync();
         Task<Marque> GetMarqueByIdAsync(int id);
+        Task<Marque> GetMarqueByIdIncludingSoftDeletedAsync(int id);
         Task AddMarqueAsync(Marque marque);
         Task UpdateMarqueAsync(Marque marque);
         Task DeleteMarqueAsync(int id);
