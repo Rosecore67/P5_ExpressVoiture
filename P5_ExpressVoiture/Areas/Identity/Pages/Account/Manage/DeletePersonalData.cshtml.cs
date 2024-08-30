@@ -48,6 +48,7 @@ namespace P5_ExpressVoiture.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Mot de passe")]
             public string Password { get; set; }
         }
 
