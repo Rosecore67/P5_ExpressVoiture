@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label asp-for="DateReparation" class="control-label"></label>
-        <input asp-for="DateReparation" class="form-control" type="date" />
+        <input asp-for="DateReparation" class="form-control" type="date" id="dateField" onkeydown="return false;" />
         <span asp-validation-for="DateReparation" class="text-danger"></span>
     </div>
 

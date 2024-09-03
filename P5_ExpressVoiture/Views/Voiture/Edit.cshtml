@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Année" class="control-label"></label>
-        <input asp-for="Année" class="form-control" type="date" />
+        <input asp-for="Année" class="form-control" type="date" min="1990-01-01" max="@DateTime.Now.ToString("yyyy-MM-dd")" id="dateField" onkeydown="return false;" />
         <span asp-validation-for="Année" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
         <label asp-for="DateAchat" class="control-label"></label>
-        <input asp-for="DateAchat" class="form-control" type="date" />
+        <input asp-for="DateAchat" class="form-control" type="date" id="dateField" onkeydown="return false;" />
         <span asp-validation-for="DateAchat" class="text-danger"></span>
     </div>
         <div class="form-group">
@@ -48,7 +48,7 @@
     </div>
     <div class="form-group">
         <label asp-for="DateDisponibiliteVente" class="control-label"></label>
-        <input asp-for="DateDisponibiliteVente" class="form-control" type="date" />
+        <input asp-for="DateDisponibiliteVente" class="form-control" type="date" id="dateField" onkeydown="return false;" />
         <span asp-validation-for="DateDisponibiliteVente" class="text-danger"></span>
     </div>
     <div class="form-group">
