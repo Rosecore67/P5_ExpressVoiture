@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models.Entities;
 using P5_ExpressVoiture.Models.Interfaces.IServices;
@@ -10,10 +11,12 @@ namespace P5_ExpressVoiture.Controllers
     public class UserRoleController : Controller
     {
         private readonly IUserRoleService _roleService;
+        private readonly UserManager<Utilisateur> _userManager;
 
-        public UserRoleController(IUserRoleService roleService)
+        public UserRoleController(IUserRoleService roleService, UserManager<Utilisateur> userManager)
         {
             _roleService = roleService;
+            _userManager = userManager;
         }
 
         // GET: Role/Index
@@ -42,11 +45,45 @@ namespace P5_ExpressVoiture.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Vérifiez si un rôle avec ce nom existe déjà, y compris les rôles soft deleted
+                var existingRole = await _roleService.GetByNameIncludeSoftDeleteAsync(model.NomRole);
+
+                if (existingRole != null)
+                {
+                    // Si le rôle existe et est soft deleted, le réactiver
+                    if (existingRole.SoftDelete)
+                    {
+                        existingRole.SoftDelete = false;
+                        var updateResult = await _roleService.UpdateRoleAsync(existingRole);
+
+                        if (updateResult.Succeeded)
+                        {
+                            TempData["SuccessMessage"] = "Le rôle a été réactivé avec succès.";
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            foreach (var error in updateResult.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                            return View(model);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Un rôle avec ce nom existe déjà.");
+                        return View(model);
+                    }
+                }
+
+                // Si le rôle n'existe pas, créer un nouveau rôle
                 var role = new UserRole { Name = model.NomRole, NomRole = model.NomRole };
                 var result = await _roleService.CreateRoleAsync(role);
+
                 if (result.Succeeded)
                 {
-                    TempData["SuccessMessage"] = "Le rôle a été ajoutée avec succès !";
+                    TempData["SuccessMessage"] = "Le rôle a été ajouté avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 

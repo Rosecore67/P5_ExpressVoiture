@@ -21,9 +21,19 @@ namespace P5_ExpressVoiture.Models.Services
             return await _userRoleRepository.GetAllAsync();
         }
 
+        public async Task<IEnumerable<UserRole>> GetAllRolesIncludesSoftDeleteAsync()
+        {
+            return await _userRoleRepository.GetAllRolesIncludeSoftDeleteAsync();
+        }
+
+        public async Task<UserRole> GetByNameIncludeSoftDeleteAsync(string roleName)
+        {
+            return await _userRoleRepository.GetByNameIncludeSoftDeleteAsync(roleName);
+        }
+
         public async Task<UserRole> GetRoleByIdAsync(string id)
         {
-            return await _roleManager.FindByIdAsync(id);
+            return await _userRoleRepository.GetByIdStringAsync(id);
         }
 
         public async Task<IdentityResult> CreateRoleAsync(UserRole role)
@@ -38,7 +48,14 @@ namespace P5_ExpressVoiture.Models.Services
 
         public async Task<IdentityResult> DeleteRoleAsync(UserRole role)
         {
-            return await _roleManager.DeleteAsync(role);
+            _userRoleRepository.Delete(role);
+            await _userRoleRepository.SaveChangesAsync();
+            return IdentityResult.Success;
+        }
+
+        public async Task HardDeleteRoleAsync(UserRole role)
+        {
+            await _userRoleRepository.HardDeleteRoleAsync(role);
         }
 
         public async Task<bool> RoleExistsAsync(string roleName)

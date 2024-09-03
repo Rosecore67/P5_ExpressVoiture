@@ -25,6 +25,11 @@ namespace P5_ExpressVoiture.Models.Repositories
             return await _entities.FindAsync(id);
         }
 
+        public virtual async Task<T> GetByIdStringAsync(string id)
+        {
+            return await _entities.FindAsync(id);
+        }
+
         public async Task AddAsync(T entity)
         {
             await _entities.AddAsync(entity);
