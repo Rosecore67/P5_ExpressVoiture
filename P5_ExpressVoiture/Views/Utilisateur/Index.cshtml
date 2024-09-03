@@ -29,7 +29,10 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete('@Url.Action("Delete", new { id = item.Id })', 'Êtes-vous sûr de vouloir supprimer cette marque ?')">
+                            Supprimer
+                        </button>
                     </form>
                 </td>
             </tr>
