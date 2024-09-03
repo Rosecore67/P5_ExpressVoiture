@@ -53,20 +53,27 @@ namespace P5_ExpressVoiture.Models.Services
         {
             if (imageFile != null && imageFile.Length > 0)
             {
-                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                var imagePath = Path.Combine(uploads, imageFile.FileName);
+                // Générer un nom de fichier unique en ajoutant un GUID avant le nom original
+                var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile.FileName)}";
 
+                // Définir le chemin d'upload
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var imagePath = Path.Combine(uploads, uniqueFileName);
+
+                // Créer le répertoire si nécessaire
                 if (!Directory.Exists(uploads))
                 {
                     Directory.CreateDirectory(uploads);
                 }
 
+                // Enregistrer l'image dans le répertoire spécifié
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     await imageFile.CopyToAsync(stream);
                 }
 
-                return "images/" + imageFile.FileName;
+                // Retourner le chemin relatif de l'image pour être utilisé dans l'application
+                return "images/" + uniqueFileName;
             }
 
             return null;
