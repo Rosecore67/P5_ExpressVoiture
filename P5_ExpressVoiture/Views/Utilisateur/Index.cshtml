@@ -30,7 +30,7 @@
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-danger"
-                                onclick="confirmDelete('@Url.Action("Delete", new { id = item.Id })', 'Êtes-vous sûr de vouloir supprimer cette marque ?')">
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = item.Id })', 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
                             Supprimer
                         </button>
                     </form>
@@ -39,3 +39,7 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/gestionValidation.js" asp-append-version="true"></script>
+}

@@ -28,7 +28,7 @@
                     <a asp-controller="Marque" asp-action="Edit" asp-route-id="@marque.Id" class="btn btn-warning">Modifier</a>
                     <form asp-controller="Marque" asp-action="Delete" asp-route-id="@marque.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-danger"
-                                onclick="confirmDelete('@Url.Action("Delete", new { id = marque.Id })', 'Êtes-vous sûr de vouloir supprimer cette marque ?')">
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = marque.Id })', 'Êtes-vous sûr de vouloir supprimer cette marque ?')">
                             Supprimer
                         </button>
                     </form>
@@ -57,7 +57,7 @@
                     <a asp-controller="Modele" asp-action="Edit" asp-route-id="@modele.Id" class="btn btn-warning">Modifier</a>
                     <form asp-controller="Modele" asp-action="Delete" asp-route-id="@modele.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-danger"
-                                onclick="confirmDelete('@Url.Action("Delete", new { id = modele.Id })', 'Êtes-vous sûr de vouloir supprimer ce modèle ?')">
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = modele.Id })', 'Êtes-vous sûr de vouloir supprimer ce modèle ?')">
                             Supprimer
                         </button>
                     </form>
@@ -85,7 +85,7 @@
                     <a asp-controller="TypeReparation" asp-action="Edit" asp-route-id="@typeReparation.Id" class="btn btn-warning">Modifier</a>
                     <form asp-controller="TypeReparation" asp-action="Delete" asp-route-id="@typeReparation.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-danger"
-                                onclick="confirmDelete('@Url.Action("Delete", new { id = typeReparation.Id })', 'Êtes-vous sûr de vouloir supprimer ce type de réparation ?')">
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = typeReparation.Id })', 'Êtes-vous sûr de vouloir supprimer ce type de réparation ?')">
                             Supprimer
                         </button>
                     </form>
