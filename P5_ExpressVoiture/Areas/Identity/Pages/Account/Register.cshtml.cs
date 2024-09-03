@@ -49,7 +49,7 @@ namespace P5_ExpressVoiture.Areas.Identity.Pages.Account
         {
             [Required(ErrorMessage = "Un nom doit être renseigné")]
             [Display(Name = "Nom d'utilisateur")]
-            public string NomUtilisateur { get; set; }  // Ajout de NomUtilisateur
+            public string NomUtilisateur { get; set; } 
 
             [Required(ErrorMessage = "Un email doit être renseigné")]
             [EmailAddress]

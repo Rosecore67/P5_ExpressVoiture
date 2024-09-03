@@ -76,10 +76,17 @@ namespace P5_ExpressVoiture.Controllers
                 var result = await _utilisateurService.RegisterUtilisateurAsync(utilisateur, model.MotDePasse);
                 if (result.Succeeded)
                 {
-                    // Assigner automatiquement le rôle "Visiteur" à chaque nouvel utilisateur
-                    await _utilisateurService.AddToRoleAsync(utilisateur, "Visiteur");
+                    // Assigner le rôle sélectionné par l'administrateur à l'utilisateur
+                    if (!string.IsNullOrEmpty(model.SelectedRoleId))
+                    {
+                        var role = await _userRoleService.GetRoleByIdAsync(model.SelectedRoleId);
+                        if (role != null)
+                        {
+                            await _utilisateurService.AddToRoleAsync(utilisateur, role.NomRole);
+                        }
+                    }
 
-                    TempData["SuccessMessage"] = "L'utilisateur a été ajoutée avec succès !";
+                    TempData["SuccessMessage"] = "L'utilisateur a été ajouté avec succès !";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -89,6 +96,7 @@ namespace P5_ExpressVoiture.Controllers
                 }
             }
 
+            // Recharger les rôles pour le dropdown
             model.Roles = (await _userRoleService.GetAllRolesAsync())
                 .Select(r => new UserRoleViewModel
                 {
