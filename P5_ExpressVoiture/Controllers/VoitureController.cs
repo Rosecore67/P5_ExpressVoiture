@@ -288,13 +288,9 @@ namespace P5_ExpressVoiture.Controllers
                 return NotFound();
             }
 
-            _voitureService.DeleteImage(voiture.Image);
-            await _voitureService.DeleteVoitureAsync(id);
-
+            // Générer le message de confirmation avec les noms récupérés
             var marque = await _marqueService.GetMarqueByIdAsync(voiture.MarqueID);
             var modele = await _modeleService.GetModeleByIdAsync(voiture.ModeleID);
-
-            // Générer le message de confirmation avec les noms récupérés
             string message = $"{voiture.Année.Year} {marque?.NomMarque ?? "Marque inconnue"} {modele?.NomModele ?? "Modèle inconnu"} a bien été supprimée";
 
             // Si l'image est vide ou null, utiliser l'image par défaut
@@ -302,13 +298,24 @@ namespace P5_ExpressVoiture.Controllers
                 ? Url.Content("~/images/default.png")
                 : Url.Content("~/" + voiture.Image);
 
+            // Créer le modèle pour la vue de confirmation
             var confirmViewModel = new ConfirmationViewModel
             {
                 Message = message,
                 ImageScreen = imageScreen
             };
-            TempData["SuccessMessage"] = "La voiture a été supprimée avec succès !";
-            return RedirectToAction("Confirm", confirmViewModel);
+
+            // Rendre la vue de confirmation avant de supprimer l'image
+            var result = View("Confirm", confirmViewModel);
+
+            // Supprimer l'image et la voiture après la confirmation de l'affichage de la vue
+            await Task.Run(async () =>
+            {
+                _voitureService.DeleteImage(voiture.Image);
+                await _voitureService.DeleteVoitureAsync(id);
+            });
+
+            return result;
         }
 
 
