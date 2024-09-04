@@ -43,7 +43,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
    dotnet restore
    ```
 ## Attention
-Dans le dossier wwwroot à la racine du projet, vous devrez ajouter un dossier "images" en respectant cette ortographe.
+Dans le dossier wwwroot à la racine du projet, vous devrez ajouter un dossier "images" puis à l'intérieur de celui-ci ajoutez une image au format '.png' nommé "default.png", en respectant l'ortographe.
 Sinon l'application ne pourra pas fonctionner correctement.
 
 3. Mettez en place la base de données :
