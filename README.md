@@ -1,6 +1,6 @@
-# Express Voitures
+# P5_ExpressVoiture
 
-Express Voitures est une application web permettant de gérer un catalogue de véhicules, d'ajouter des réparations, de suivre les finances associées aux véhicules, et de gérer les utilisateurs et les rôles.
+ExpressVoiture est une application web permettant de gérer un catalogue de véhicules, d'ajouter des réparations, de suivre les finances associées aux véhicules, et de gérer les utilisateurs et les rôles.
 
 ## Table des matières
 
@@ -24,7 +24,7 @@ Express Voitures est une application web permettant de gérer un catalogue de v�
 
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
-- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [SQL Server](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads) ou une autre base de données compatible
 - Un éditeur de code comme [Visual Studio](https://visualstudio.microsoft.com/) ou [Visual Studio Code](https://code.visualstudio.com/)
 
@@ -33,7 +33,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 1. Clonez le dépôt depuis GitHub :
 
    ```bash
-   git clone https://github.com/votre-nom-utilisateur/express-voitures.git
+   git clone https://github.com/Rosecore67/P5_ExpressVoiture.git
    cd express-voitures
    ```
 
@@ -42,6 +42,9 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
    ```bash
    dotnet restore
    ```
+## Attention
+Dans le dossier wwwroot à la racine du projet, vous devrez ajouter un dossier "images" en respectant cette ortographe.
+Sinon l'application ne pourra pas fonctionner correctement.
 
 3. Mettez en place la base de données :
 
@@ -62,10 +65,19 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 
 ## Utilisation
 
+### Gestion des comptes
+
+- Les administrateurs peuvent gérer les comptes et y apporter des modifications.
+- Les administrateurs peuvent ajouter de nouveau rôle aux utilisateurs.
+
 ### Compte Administrateur
 
-1. Connectez-vous en tant qu'administrateur pour gérer les voitures, les utilisateurs, les rôles et autres fonctionnalités administratives.
-2. Pour créer un compte administrateur, vous pouvez initialiser les rôles et l'utilisateur administrateur par défaut en modifiant `Program.cs`.
+- Connectez-vous en tant qu'administrateur pour gérer les voitures, les utilisateurs, les rôles et autres fonctionnalités administratives.
+- Pour créer un compte administrateur, vous pouvez initialiser les rôles et l'utilisateur administrateur par défaut en modifiant `Program.cs`.
+
+### Compte Visiteur
+
+- Permet uniquement de naviguer sur deux pages pour le moment, la page d'accueil et le détails des véhicules.
 
 ### Gestion des Véhicules
 
@@ -75,13 +87,19 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 ### Réparations et Finances
 
 - Gérer les réparations et les finances depuis la vue "Détails de la voiture".
+- En cas de suppression d'un véhicule, les données de réparations et finances seront supprimés en même temps.
+
+### Modèle, Marque et Type de Réparation
+
+- Ces tables permettent d'ajouter des noms pour les trois types de données.
+- Ils sont uniquement accessible aux administrateurs dans l'onglet "Administration".
 
 ## Structure du Projet
 
 - **Controllers** : Contient les contrôleurs qui gèrent les requêtes HTTP et retournent les vues ou les réponses API.
 - **Models** : Contient les entités de base de données, les ViewModels et les services.
 - **Views** : Contient les vues Razor utilisées pour afficher les données aux utilisateurs.
-- **wwwroot** : Contient les fichiers statiques (CSS, JavaScript, images).
+- **wwwroot** : Contient les fichiers statiques (CSS, JavaScript, images = dossier à créer).
 - **Areas** : Contient les pages Razor pour la gestion des comptes utilisateurs.
 
 ## Contribuer
