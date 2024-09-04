@@ -1,0 +1,41 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.VoitureDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<P5_ExpressVoiture.Models.Entities.Utilisateur> SignInManager
+@inject UserManager<P5_ExpressVoiture.Models.Entities.Utilisateur> UserManager
+
+@{
+    ViewData["Title"] = $"{Model.Marque} {Model.Modele}";
+}
+
+<div class="details-container">
+    <div class="image-section">
+        <img src="@Model.Image" alt="Image de la voiture" class="img-fluid voiture-image" />
+        <a asp-action="Index" class="btn custom-btn-secondary">← Retour</a>
+    </div>
+
+    <div class="details-section">
+        <h1>@Model.Marque @Model.Modele @Model.Année.Year</h1>
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <p>Code VIN : @Model.CodeVIN</p>
+            <p>Date d'achat : @Model.DateAchat.ToShortDateString()</p>
+        }
+
+        <p>Disponibilité : @(Model.EstDisponible ? "Disponible" : "Non disponible")</p>
+        <p>Date de disponibilité à la vente : @(Model.DateDisponibiliteVente == DateTime.MinValue ? "--/--/----" : Model.DateDisponibiliteVente.ToShortDateString())</p>
+        <p>Finition : @Model.Finition</p>        
+        <p>Prix de vente : @(Model.PrixVente?.ToString("C") ?? "Prix non disponible")</p>
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <hr />
+            <div class="admin-actions">
+                <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-finances">Finances</a>
+                <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@Model.Id" class="btn btn-reparations">Réparations</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
+            </div>
+        }
+    </div>
+</div>

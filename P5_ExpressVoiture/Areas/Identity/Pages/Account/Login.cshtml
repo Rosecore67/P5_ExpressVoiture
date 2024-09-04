@@ -1,0 +1,41 @@
+﻿@page
+@model P5_ExpressVoiture.Areas.Identity.Pages.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Se connecter";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="login-title">Express Voitures</h1>
+        <form id="account" method="post" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email" class="form-label">Adresse email</label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Password" class="form-label">Mot de passe</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group login-actions">
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-secondary custom-btn-login">S'inscrire</a>
+                <span class="or-text">ou</span>                
+                <button id="login-submit" type="submit" class="btn btn-primary custom-btn-login">Se connecter</button>
+            </div>
+
+            <div class="login-footer">
+                <a id="forgot-password" asp-page="./ForgotPassword">Mot de passe oublié ?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

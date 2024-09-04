@@ -1,0 +1,18 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.ModeleViewModel
+
+<h2 class="form-title">Modifier le modèle</h2>
+
+<form asp-action="Edit" class="custom-form">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="NomModele" class="control-label"></label>
+        <input asp-for="NomModele" class="form-control" />
+        <span asp-validation-for="NomModele" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+        <a asp-controller="Admin" asp-action="Index" class="btn custom-btn-secondary">Annuler</a>
+    </div>
+</form>

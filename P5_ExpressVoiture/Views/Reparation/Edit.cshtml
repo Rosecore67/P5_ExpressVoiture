@@ -1,0 +1,42 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.ReparationViewModel
+
+<h2 class="form-title">Modifier une réparation</h2>
+
+<form asp-action="Edit" class="custom-form">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="VoitureID" />
+
+    <div class="form-group">
+        <label asp-for="DateReparation" class="control-label"></label>
+        <input asp-for="DateReparation" class="form-control" type="date" id="dateField" onkeydown="return false;" />
+        <span asp-validation-for="DateReparation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CoutReparation" class="control-label"></label>
+        <input asp-for="CoutReparation" class="form-control" />
+        <span asp-validation-for="CoutReparation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TypeReparationID" class="control-label">Type de Réparation</label>
+        <select asp-for="TypeReparationID" class="form-control" asp-items="@(new SelectList(Model.TypeReparations, "Id", "NomTypeReparation"))">
+            <option value="">Sélectionnez un type</option>
+        </select>
+        <span asp-validation-for="TypeReparationID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+        <a asp-action="Index" asp-route-voitureId="@Model.VoitureID" class="btn custom-btn-secondary">Annuler</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <script src="~/js/gestionDateCalendrier.js" asp-append-version="true"></script>
+    }
+}
+

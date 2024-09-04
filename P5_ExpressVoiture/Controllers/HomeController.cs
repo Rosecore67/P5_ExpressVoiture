@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P5_ExpressVoiture.Models;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace P5_ExpressVoiture.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

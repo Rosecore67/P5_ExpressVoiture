@@ -20,3 +20,270 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    color: #5f4b32;
+    margin-bottom: 20px;
+}
+
+.custom-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .custom-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .custom-form .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+.image-preview {
+    max-width: 200px;
+    margin-top: 10px;
+    display: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.custom-btn {
+    background-color: #af8555;
+    border-color: #af8555;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .custom-btn:hover {
+        background-color: #8f6a44;
+        border-color: #8f6a44;
+    }
+
+.details-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.image-section {
+    flex: 1;
+    text-align: center;
+    margin-right: 40px;
+}
+
+.voiture-image {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.details-section {
+    flex: 1;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+    .details-section h1 {
+        font-size: 24px;
+        color: #5a4d4d;
+    }
+
+    .details-section p {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+.custom-button {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .custom-button:hover {
+        background-color: #925f2a;
+        color: white;
+    }
+
+.btn-finances {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .btn-finances:hover {
+        background-color: #925f2a;
+    }
+
+/* Page réparation */
+
+.btn-reparations {
+    background-color: #a27135;
+    color: white;
+    border: none;
+}
+
+    .btn-reparations:hover {
+        background-color: #925f2a;
+    }
+
+.border-success {
+    border: 2px solid green;
+}
+
+.border-danger {
+    border: 2px solid red;
+}
+
+/*Page de Login*/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #4b2e83; 
+}
+
+.login-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.or-text {
+    margin: 0 1rem;
+}
+
+.login-footer {
+    margin-top: 1rem;
+}
+
+.custom-btn-login {
+    background-color: #c19a6b; 
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+    .custom-btn-login:hover {
+        background-color: #a67b5b; 
+    }
+
+    /*Page d'inscription*/
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.register-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #4b2e83; /* Custom color for your title */
+}
+
+.register-form .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.custom-btn-register {
+    background-color: #c19a6b; /* Custom color for your buttons */
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+    .custom-btn-register:hover {
+        background-color: #a67b5b; /* Darker shade on hover */
+    }
+
+
+.custom-btn-secondary {
+    background-color: transparent;
+    color: #f0ad4e;
+    border: 2px solid #f0ad4e;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+    width: 100%;
+}
+
+    .custom-btn-secondary:hover {
+        background-color: #f0ad4e;
+        color: white;
+        border: 2px solid #ec971f;
+    }

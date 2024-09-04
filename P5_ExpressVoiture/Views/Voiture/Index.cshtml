@@ -1,0 +1,51 @@
+﻿@model IEnumerable<P5_ExpressVoiture.Models.ViewModels.VoitureIndexViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<P5_ExpressVoiture.Models.Entities.Utilisateur> SignInManager
+@inject UserManager<P5_ExpressVoiture.Models.Entities.Utilisateur> UserManager
+
+@{
+    ViewData["Title"] = "Nos voitures";
+}
+
+<div class="text-center mb-4">
+    <h1>Nos voitures</h1>
+
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create" class="btn custom-button">Ajouter une voiture</a>
+        </p>
+    }
+</div>
+
+<div class="row">
+    @foreach (var voiture in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow @(voiture.EstDisponible ? "border-success" : "border-danger")" style="height: 500px;">
+                <img class="card-img-top" src="@Url.Content(voiture.Image)" alt="Image de @voiture.Marque @voiture.Modele" style="height: 200px; object-fit: cover;">
+                <div class="card-body" style="height: 260px; overflow: hidden;">
+                    <h5 class="card-title">@voiture.Marque @voiture.Modele</h5>
+                    <p class="card-text">
+                        Disponibilité : @(voiture.EstDisponible ? "Disponible" : "Non disponible")<br />
+                        Année : @voiture.Année.Year<br />
+                        Finition : @voiture.Finition<br />
+                        Date de disponibilité à la vente : @(voiture.DateDisponibiliteVente == DateTime.MinValue ? "--/--/----" : voiture.DateDisponibiliteVente.ToShortDateString())<br />                       
+                        Prix : @(voiture.PrixVente?.ToString("C") ?? "Prix non disponible")<br />
+                    </p>
+                   
+                        <a asp-action="Details" asp-route-id="@voiture.Id" class="btn btn-sm btn-outline-secondary mb-2 mr-2">Voir les détails</a>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Finance" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-sm btn-finances mb-1 mr-1">Finances</a>
+                            <a asp-controller="Reparation" asp-action="Index" asp-route-voitureId="@voiture.Id" class="btn btn-sm btn-reparations mb-1 mr-1">Réparations</a>
+                            <a asp-action="Edit" asp-route-id="@voiture.Id" class="btn btn-sm btn-warning mb-1 mr-1">Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@voiture.Id" class="btn btn-sm btn-danger mb-1 mr-1">Supprimer</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

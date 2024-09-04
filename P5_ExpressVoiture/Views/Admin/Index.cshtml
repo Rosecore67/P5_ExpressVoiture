@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Administration";
+}
+
+<h1>Administration</h1>
+
+<a asp-controller="Utilisateur" asp-action="Index" class="btn btn-primary">Gérer les utilisateurs</a>
+<a asp-controller="UserRole" asp-action="Index" class="btn btn-primary">Gérer les rôles</a>
+<a asp-controller="TypeReparation" asp-action="Create" class="btn btn-primary">Ajouter un nouveau type de réparation</a>
+<a asp-controller="Marque" asp-action="Create" class="btn btn-primary">Ajouter une marque</a>
+<a asp-controller="Modele" asp-action="Create" class="btn btn-primary">Ajouter un modèle</a>
+
+<h2>Marques</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var marque in ViewBag.Marques)
+        {
+            <tr>
+                <td>@marque.NomMarque</td>
+                <td>
+                    <a asp-controller="Marque" asp-action="Edit" asp-route-id="@marque.Id" class="btn btn-warning">Modifier</a>
+                    <form asp-controller="Marque" asp-action="Delete" asp-route-id="@marque.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = marque.Id })', 'Êtes-vous sûr de vouloir supprimer cette marque ?')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h2>Modèles</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var modele in ViewBag.Modeles)
+        {
+            <tr>
+                <td>@modele.NomModele</td>
+                <td>
+                    <a asp-controller="Modele" asp-action="Edit" asp-route-id="@modele.Id" class="btn btn-warning">Modifier</a>
+                    <form asp-controller="Modele" asp-action="Delete" asp-route-id="@modele.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = modele.Id })', 'Êtes-vous sûr de vouloir supprimer ce modèle ?')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Types de Réparation</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom du Type de Réparation</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var typeReparation in ViewBag.TypeReparation)
+        {
+            <tr>
+                <td>@typeReparation.NomTypeReparation</td>
+                <td>
+                    <a asp-controller="TypeReparation" asp-action="Edit" asp-route-id="@typeReparation.Id" class="btn btn-warning">Modifier</a>
+                    <form asp-controller="TypeReparation" asp-action="Delete" asp-route-id="@typeReparation.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = typeReparation.Id })', 'Êtes-vous sûr de vouloir supprimer ce type de réparation ?')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/gestionValidation.js" asp-append-version="true"></script>
+}

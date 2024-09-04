@@ -1,0 +1,45 @@
+﻿@model IEnumerable<P5_ExpressVoiture.Models.ViewModels.UtilisateurViewModel>
+
+<h1>Gestion des utilisateurs</h1>
+
+<a asp-action="Create" class="btn btn-primary">Créer un nouvel utilisateur</a>
+<a asp-controller="Admin" asp-action="Index" class="btn btn-info">Retour au menu Administration</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nom d'utilisateur</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Email</td>
+                <td>@item.NomUtilisateur</td>
+                <td>
+                    @foreach (var role in item.Roles)
+                    {
+                        <span>@role.NomRole</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = item.Id })', 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/gestionValidation.js" asp-append-version="true"></script>
+}

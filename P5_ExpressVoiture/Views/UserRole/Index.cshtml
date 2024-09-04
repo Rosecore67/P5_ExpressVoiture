@@ -1,0 +1,37 @@
+﻿@model IEnumerable<P5_ExpressVoiture.Models.ViewModels.UserRoleViewModel>
+
+<h2>Gestion des rôles</h2>
+
+<a asp-action="Create" class="btn btn-primary">Ajouter un nouveau rôle</a>
+<a asp-controller="Admin" asp-action="Index" class="btn btn-info">Retour au menu Administration</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom du rôle</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.NomRole</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@role.Id" class="btn btn-warning">Modifier</a>
+                    <form asp-action="Delete" asp-route-id="@role.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="confirmDelete(event, '@Url.Action("Delete", new { id = role.Id })', 'Êtes-vous sûr de vouloir supprimer ce rôle ? Vous ne pourrez plus le récupérer.')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/gestionValidation.js" asp-append-version="true"></script>
+}

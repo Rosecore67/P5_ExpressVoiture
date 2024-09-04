@@ -1,0 +1,22 @@
+﻿@model P5_ExpressVoiture.Models.ViewModels.FinanceViewModel
+
+<h2 class="form-title">Ajouter des informations financières</h2>
+
+<form asp-action="Create" class="custom-form">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="VoitureID" />
+    <div>
+        <b>Ce véhicule n'a pas encore de finances établies, veuillez ajouter un prix d'achat.</b>
+        <b>Si vous n'avez pas l'information, enregistrez simplement la valeur affichée.</b>
+    </div>
+    <div class="form-group">
+        <label asp-for="PrixAchat" class="control-label"></label>
+        <input asp-for="PrixAchat" class="form-control" />
+        <span asp-validation-for="PrixAchat" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary custom-btn">Enregistrer</button>
+    </div>
+</form>
