@@ -22,7 +22,7 @@
     <div class="form-group">
         <label asp-for="TypeReparationID" class="control-label">Type de Réparation</label>
         <select asp-for="TypeReparationID" class="form-control" asp-items="@(new SelectList(Model.TypeReparations, "Id", "NomTypeReparation"))">
-            <option value="">Sélectionnez un type</option> <!-- Option de base -->
+            <option value="">Sélectionnez un type</option>
         </select>
         <span asp-validation-for="TypeReparationID" class="text-danger"></span>
     </div>

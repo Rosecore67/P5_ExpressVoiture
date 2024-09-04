@@ -128,7 +128,7 @@ namespace P5_ExpressVoiture.Controllers
             return View(model);
         }
 
-
+        // POST: Reparation/Delete/1
         [HttpGet]
         public async Task<IActionResult> Delete(int id, int voitureId)
         {
